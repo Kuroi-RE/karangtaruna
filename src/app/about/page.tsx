@@ -1,11 +1,15 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import React from "react";
-import Link from "next/link";
-import { Button } from "~/components/ui/button";
-import Timeline from "~/components/Timeline";
 
 import { motion } from "framer-motion";
-import ParticleBackground from "~/components/ParticleBackground";
+
+const ParticleBackground = dynamic(
+  () => import("~/components/ParticleBackground"),
+  { ssr: false },
+);
+const Timeline = dynamic(() => import("~/components/Timeline"), { ssr: false });
 import SplitText from "~/components/SplitText";
 
 const fadeIn = {
