@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, { Suspense } from "react";
-import Squares from "~/components/SquareBackground";
 import { Button } from "~/components/ui/button";
 import WriterText from "~/components/WriteText";
 
