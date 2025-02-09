@@ -26,6 +26,7 @@ import {
 import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { useToast } from "~/hooks/use-toast";
+import SplitText from "~/components/SplitText";
 const images = ["/images/1.jpg", "/images/2.jpg", "/images/3.jpg"];
 
 type DataActivity = {
@@ -67,6 +68,22 @@ const DataActivity: DataActivity = [
   },
 ];
 
+// Motion Variants
+const fadeIn = (delay: number) => ({
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: delay } },
+});
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+// const slideImage = {
+//   hidden: { opacity: 0, x: 50 },
+//   visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+// };
+
 const Activity = () => {
   const [current, setCurrent] = React.useState(0);
   const { toast } = useToast();
@@ -82,36 +99,63 @@ const Activity = () => {
       className="flex min-h-[50vh] w-full flex-col bg-blueSea-foreground text-black dark:bg-[#1a3b52] dark:text-white"
     >
       <div className="flex flex-col place-items-center gap-4 py-2">
-        <div className="w-full py-24 text-center">
-          <span className="text-sm text-muted-foreground dark:text-blueSea-mute md:text-xl">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="w-full py-24 text-center"
+        >
+          <motion.span
+            variants={fadeInUp}
+            className="text-sm text-muted-foreground dark:text-blueSea-mute md:text-xl"
+          >
             apa yang kita lakukan?
-          </span>
-          <h1 className="text-xl font-bold md:text-3xl lg:text-4xl">
+          </motion.span>
+          {/* <h1 className="text-xl font-bold md:text-3xl lg:text-4xl">
             Kegiatan yang terlaksana
+          </h1> */}
+          <h1>
+            <SplitText
+              text="Kegiatan yang terlaksana"
+              className="text-xl font-bold md:text-3xl lg:text-4xl"
+              delay={50}
+              animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
+              animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
+              // easing={""}
+              threshold={0.2}
+              rootMargin="-50px"
+            />
           </h1>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:justify-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex flex-col gap-4 md:flex-row md:flex-wrap md:justify-center"
+        >
           {DataActivity.map((data, index) => (
             <AlertDialog key={index}>
               <AlertDialogTrigger asChild>
-                <Card className="flex w-[300px] flex-col gap-12 border-none bg-blueSea-mute dark:bg-[#03346E]">
-                  <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle>
-                      <Volleyball size={35} />
-                    </CardTitle>
-                    <CardDescription>
-                      <ArrowUpRight size={30} />
-                    </CardDescription>
-                  </CardHeader>
+                <motion.div variants={fadeIn(index * 0.2)}>
+                  <Card className="flex w-[300px] flex-col gap-12 border-none bg-blueSea-mute dark:bg-[#03346E]">
+                    <CardHeader className="flex flex-row items-center justify-between">
+                      <CardTitle>
+                        <Volleyball size={35} />
+                      </CardTitle>
+                      <CardDescription>
+                        <ArrowUpRight size={30} />
+                      </CardDescription>
+                    </CardHeader>
 
-                  <CardContent>
-                    <h1 className="font-semibold">{data.title}</h1>
-                    <p className="line-clamp-3 text-muted-foreground">
-                      {data.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                    <CardContent>
+                      <h1 className="font-semibold">{data.title}</h1>
+                      <p className="line-clamp-3 text-muted-foreground">
+                        {data.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </AlertDialogTrigger>
               <AlertDialogContent className="h-full w-full bg-blueSea-mute dark:bg-[#03346E] md:flex md:flex-col md:gap-20">
                 <AlertDialogHeader className="gap-10 md:flex md:flex-col md:gap-14">
@@ -121,7 +165,7 @@ const Activity = () => {
                       {data.description}
                     </AlertDialogDescription>
                   </div>
-                  <div className="relative mt-4 flex h-96 w-full flex-col items-center md:h-[27rem] md:justify-center">
+                  <div className="relative mt-4 flex h-96 w-full flex-col items-center md:h-[27rem] md:justify-center lg:h-[20rem]">
                     {data.image.map((src, index) => (
                       <motion.div
                         key={index}
@@ -181,7 +225,7 @@ const Activity = () => {
               </AlertDialogContent>
             </AlertDialog>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

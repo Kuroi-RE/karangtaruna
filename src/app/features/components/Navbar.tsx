@@ -17,7 +17,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   const [selectedTheme, setSelectedTheme] = React.useState<string | null>(
-    "dark",
+    "light",
   );
   const [isOpen, setIsOpen] = React.useState(false);
   const { setTheme } = useTheme();
@@ -26,6 +26,7 @@ export default function Navbar() {
     <nav className="fixed z-50 h-16 w-full bg-background shadow-md">
       <div className="container !mx-5 flex h-full items-center justify-between px-4 py-3">
         {/* Logo */}
+
         <Link href="/" className="flex gap-2 text-xl font-bold">
           <Image src="/favicon.ico" width={40} height={40} alt="logo" />
           <span className="max-w-3.5 text-sm">Karang Taruna</span>

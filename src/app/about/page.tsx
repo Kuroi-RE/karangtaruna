@@ -1,7 +1,17 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import Timeline from "~/components/Timeline";
+
+import { motion } from "framer-motion";
+import ParticleBackground from "~/components/ParticleBackground";
+import SplitText from "~/components/SplitText";
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.7 } },
+};
 
 type StrukturData = {
   avatar: string;
@@ -51,18 +61,33 @@ const StrukturData: StrukturData = [
 
 const page = () => {
   return (
-    <div className="py-24">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative py-24"
+    >
+      <div className="absolute left-0 top-0 -z-10 h-full w-full">
+        <ParticleBackground type="cobweb" />
+      </div>
       <section
         id="about"
         className="flex min-h-[70vh] flex-col text-black dark:text-white"
       >
-        <div className="flex w-full flex-col gap-16 pb-36 pt-24">
-          <div className="relative flex items-center gap-4 px-4">
-            <h1 className="text-3xl font-bold">Siapa Kita?</h1>
+        <div className="relative flex w-full flex-col gap-7 pb-36 pt-24 md:grid md:grid-cols-2 md:grid-rows-1 lg:divide-x-2">
+          {/* Bagian Kiri */}
+          <motion.div
+            className="relative flex items-center gap-5 px-4 md:h-full lg:pl-16"
+            variants={fadeIn}
+          >
+            <h1 className="text-3xl font-bold md:self-start md:text-4xl lg:pt-5 lg:text-6xl">
+              Siapa Kita?
+            </h1>
+
             <svg
-              className="absolute left-28 -z-10 h-[129px] w-[120px]"
+              className="absolute left-28 -z-10 h-[129px] w-[120px] md:-top-5 md:left-36 lg:left-80 lg:top-0"
               viewBox="0 0 170 129"
-              fillRule="inherit"
+              fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -70,23 +95,31 @@ const page = () => {
                 stroke="#00A9FF"
               />
             </svg>
-          </div>
+          </motion.div>
 
-          <div className="relative flex flex-col gap-4">
-            <div className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"></div>
-            <div className="px-4">
-              <h2>
+          {/* Bagian Kanan */}
+          <motion.div
+            className="relative flex flex-col gap-4 md:max-w-full md:pt-10 lg:max-w-full"
+            variants={fadeIn}
+          >
+            <motion.div
+              className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"
+              variants={fadeIn}
+            ></motion.div>
+
+            <motion.div className="px-4 lg:px-10" variants={fadeIn}>
+              <h2 className="lg:text-xl">
                 Kami adalah pemuda-pemudi dusun domas, kami bekerja sama untuk
                 membangun dusun domas menjadi lebih maju.
               </h2>
-              <p className="text-muted-foreground">
+              <p className="lg:text-md text-muted-foreground">
                 Kami memiliki tujuan untuk membangun dusun domas menjadi dusun
                 yang memiliki keinginan untuk maju lorem ipsum lorem lorem
                 ipsum, untuk itu kami ada disini untuk bertukar pemikiran demi
                 kemajuan dusun domas.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
       <section
@@ -94,42 +127,59 @@ const page = () => {
         className="flex min-h-[70vh] flex-col text-black dark:text-white"
       >
         <div className="flex w-full flex-col gap-16 pb-36">
-          <div className="relative flex flex-col items-center gap-4 px-4">
-            <h1 className="text-3xl font-bold">Visi & Misi</h1>
-            <p className="text-center text-muted-foreground">
+          <motion.div
+            variants={fadeIn}
+            className="relative flex flex-col items-center gap-4 px-4"
+          >
+            <h1 className="text-3xl font-bold md:text-4xl lg:text-6xl">
+              Visi & Misi
+            </h1>
+            <p className="text-center text-muted-foreground md:px-4 md:text-lg">
               Visi dan Misi adalah hal yang sakral bagi sebuah organisasi,
               visi&misi memperlihatkan bagaimana kualitas dari sebuah
               organisasi.
             </p>
-          </div>
-          <div className="relative flex flex-col gap-4">
+          </motion.div>
+          <motion.div
+            variants={fadeIn}
+            className="relative flex flex-col gap-4"
+          >
             <div className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"></div>
             <div className="px-4">
-              <h2>Visi</h2>
+              <h2 className="md:text-2xl lg:text-4xl">Visi</h2>
               <p className="text-muted-foreground">
                 Menjadi organisasi pemuda-pemudi yang berprestasi dan berdaya
                 saing.
               </p>
             </div>
             <div className="px-4 text-right">
-              <h2>Misi</h2>
+              <h2 className="md:text-2xl lg:text-4xl">Misi</h2>
               <p className="text-muted-foreground">
                 Membangun pemuda-pemudi yang berprestasi dan berdaya saing.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <div className="flex min-h-[300px] w-full items-center justify-center bg-gradient-to-r from-primary to-blueSea-foreground dark:from-primary dark:to-blue-800">
-        <h1 className="text-center text-3xl font-bold italic dark:text-white">
-          “Domas Gumebyar, Indonesia Sumunar! Domas Guyub, Indonesia Murub!”
-        </h1>
+        <SplitText
+          text="“Domas Gumebyar, Indonesia Sumunar! Domas Guyub, Indonesia Murub!”"
+          className="text-center text-3xl font-bold italic dark:text-white"
+          delay={50}
+          animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
+          animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
+          threshold={0.2}
+          rootMargin="-50px"
+        />
       </div>
 
       {/* Timeline */}
       <div>
-        <div className="relative flex w-full flex-col gap-5 pb-10 pt-24">
+        <motion.div
+          variants={fadeIn}
+          className="relative flex w-full flex-col gap-5 pb-10 pt-36 md:pb-24"
+        >
           <div className="flex items-center gap-4 px-4">
             <h1 className="text-3xl font-bold">Struktur Organisasi</h1>
           </div>
@@ -143,10 +193,10 @@ const page = () => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
         <Timeline data={StrukturData} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -3,20 +3,34 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "~/components/ui/button";
+import { motion } from "framer-motion";
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.7 } },
+};
 
 const About = () => {
   return (
-    <section
+    <motion.section
       id="about"
       className="flex min-h-[70vh] flex-col text-black dark:text-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="flex w-full flex-col gap-16 pb-36 pt-24 md:flex-row md:justify-between lg:grid lg:grid-cols-2 lg:grid-rows-1 lg:divide-x-2">
-        <div className="relative flex items-center gap-4 px-4 md:h-full lg:pl-16">
-          <h1 className="text-3xl font-bold md:text-4xl lg:self-start lg:pt-5 lg:text-6xl">
+      <div className="relative flex w-full flex-col gap-7 pb-36 pt-24 md:grid md:grid-cols-2 md:grid-rows-1 lg:divide-x-2">
+        {/* Bagian Kiri */}
+        <motion.div
+          className="relative flex items-center gap-4 px-4 md:h-full lg:pl-16"
+          variants={fadeIn}
+        >
+          <h1 className="text-3xl font-bold md:self-start md:text-4xl lg:pt-5 lg:text-6xl">
             Siapa Kita?
           </h1>
+
           <svg
-            className="absolute left-28 -z-10 h-[129px] w-[120px] md:left-52 lg:left-80 lg:top-0"
+            className="absolute left-28 -z-10 h-[129px] w-[120px] md:-top-5 md:left-36 lg:left-80 lg:top-0"
             viewBox="0 0 170 129"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -26,11 +40,19 @@ const About = () => {
               stroke="#00A9FF"
             />
           </svg>
-        </div>
+        </motion.div>
 
-        <div className="relative flex flex-col gap-4 md:max-w-96 md:pt-10 lg:max-w-full">
-          <div className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"></div>
-          <div className="px-4 lg:px-10">
+        {/* Bagian Kanan */}
+        <motion.div
+          className="relative flex flex-col gap-4 md:max-w-full md:pt-10 lg:max-w-full"
+          variants={fadeIn}
+        >
+          <motion.div
+            className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"
+            variants={fadeIn}
+          ></motion.div>
+
+          <motion.div className="px-4 lg:px-10" variants={fadeIn}>
             <h2 className="lg:text-xl">
               Kami adalah pemuda-pemudi dusun domas, kami bekerja sama untuk
               membangun dusun domas menjadi lebih maju.
@@ -41,9 +63,9 @@ const About = () => {
               untuk itu kami ada disini untuk bertukar pemikiran demi kemajuan
               dusun domas.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="pl-4 lg:pl-10">
+          <motion.div className="pl-4 lg:pl-10" variants={fadeIn}>
             <Link href="/about">
               <Button
                 variant="outline"
@@ -52,10 +74,10 @@ const About = () => {
                 Selengkapnya
               </Button>
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
