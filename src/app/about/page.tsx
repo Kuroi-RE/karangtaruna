@@ -7,9 +7,17 @@ import { motion } from "framer-motion";
 
 const ParticleBackground = dynamic(
   () => import("~/components/ParticleBackground"),
-  { ssr: false },
+  { ssr: false, loading: () => <p>Loading</p> },
 );
-const Timeline = dynamic(() => import("~/components/Timeline"), { ssr: false });
+const Timeline = dynamic(() => import("~/components/Timeline"), {
+  ssr: false,
+  loading: () => <p>Loading</p>,
+});
+
+const Misi = dynamic(() => import("~/components/Misi"), {
+  ssr: false,
+  loading: () => <p>Loading</p>,
+});
 import SplitText from "~/components/SplitText";
 
 const fadeIn = {
@@ -66,8 +74,10 @@ const StrukturData: StrukturData = [
 const page = () => {
   return (
     <motion.div
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0.5, y: 20 }} // Tidak hilang total, tapi tetap ada efek masuk
+      whileInView={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
       className="relative py-24"
     >
@@ -113,14 +123,22 @@ const page = () => {
 
             <motion.div className="px-4 lg:px-10" variants={fadeIn}>
               <h2 className="lg:text-xl">
-                Kami adalah pemuda-pemudi dusun domas, kami bekerja sama untuk
-                membangun dusun domas menjadi lebih maju.
+                Mewujudkan Karang Taruna Mekar Jadi sebagai organisasi
+                kepemudaan yang mandiri, kreatif, dan inovatif dalam membangun
+                masyarakat yang berdaya saing, harmonis, dan sejahtera.
               </h2>
               <p className="lg:text-md text-muted-foreground">
-                Kami memiliki tujuan untuk membangun dusun domas menjadi dusun
-                yang memiliki keinginan untuk maju lorem ipsum lorem lorem
-                ipsum, untuk itu kami ada disini untuk bertukar pemikiran demi
-                kemajuan dusun domas.
+                Karang Taruna Mekar Jadi hadir sebagai wadah bagi pemuda-pemudi
+                Dusun Domas untuk berperan aktif dalam pembangunan sosial,
+                ekonomi, dan budaya di lingkungan sekitar. Kami berkomitmen
+                untuk menciptakan generasi muda yang memiliki semangat gotong
+                royong, kepedulian sosial, dan kemampuan berinovasi guna
+                menghadapi tantangan masa depan. Melalui berbagai program dan
+                kegiatan, kami mendorong partisipasi aktif dalam pengembangan
+                keterampilan, kewirausahaan, serta kepemimpinan yang bertanggung
+                jawab. Dengan memperkuat solidaritas dan kerja sama, kami yakin
+                bahwa Dusun Domas dapat berkembang menjadi lingkungan yang lebih
+                maju, mandiri, dan sejahtera bagi seluruh masyarakat.
               </p>
             </motion.div>
           </motion.div>
@@ -138,29 +156,39 @@ const page = () => {
             <h1 className="text-3xl font-bold md:text-4xl lg:text-6xl">
               Visi & Misi
             </h1>
-            <p className="text-center text-muted-foreground md:px-4 md:text-lg">
-              Visi dan Misi adalah hal yang sakral bagi sebuah organisasi,
-              visi&misi memperlihatkan bagaimana kualitas dari sebuah
-              organisasi.
+            <p className="max-w-prose text-center text-muted-foreground md:px-4 md:text-lg">
+              Visi dan misi merupakan landasan utama bagi sebuah organisasi.
+              Keduanya mencerminkan arah, tujuan, serta komitmen dalam
+              menjalankan peran dan tanggung jawabnya. Dengan visi yang jelas
+              dan misi yang terstruktur, organisasi dapat tumbuh dan berkembang
+              secara berkelanjutan.
             </p>
           </motion.div>
           <motion.div
             variants={fadeIn}
             className="relative flex flex-col gap-4"
           >
-            <div className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"></div>
             <div className="px-4">
-              <h2 className="md:text-2xl lg:text-4xl">Visi</h2>
-              <p className="text-muted-foreground">
-                Menjadi organisasi pemuda-pemudi yang berprestasi dan berdaya
-                saing.
+              <h2 className="text-xl tracking-wider md:text-2xl lg:text-4xl">
+                Visi
+              </h2>
+              <p className="max-w-prose text-sm text-muted-foreground md:text-lg">
+                Menjadikan Karang Taruna Mekar Jadi sebagai organisasi
+                kepemudaan yang mandiri, kreatif, dan inovatif, serta berperan
+                aktif dalam membangun masyarakat yang berdaya saing, harmonis,
+                dan sejahtera. Dengan semangat kebersamaan dan gotong royong,
+                kami berkomitmen untuk menciptakan lingkungan yang lebih maju,
+                inklusif, dan berdaya guna bagi seluruh generasi muda serta
+                masyarakat sekitar.
               </p>
             </div>
             <div className="px-4 text-right">
-              <h2 className="md:text-2xl lg:text-4xl">Misi</h2>
-              <p className="text-muted-foreground">
-                Membangun pemuda-pemudi yang berprestasi dan berdaya saing.
-              </p>
+              <h2 className="text-xl tracking-wider md:text-2xl lg:text-4xl">
+                Misi
+              </h2>
+              <div className="flex w-full justify-end text-muted-foreground">
+                <Misi />
+              </div>
             </div>
           </motion.div>
         </div>
@@ -169,7 +197,7 @@ const page = () => {
       <div className="flex min-h-[300px] w-full items-center justify-center bg-gradient-to-r from-primary to-blueSea-foreground dark:from-primary dark:to-blue-800">
         <SplitText
           text="“Domas Gumebyar, Indonesia Sumunar! Domas Guyub, Indonesia Murub!”"
-          className="text-center text-3xl font-bold italic dark:text-white"
+          className="text-center text-3xl font-bold italic dark:text-white lg:text-6xl"
           delay={50}
           animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
           animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
@@ -182,18 +210,19 @@ const page = () => {
       <div>
         <motion.div
           variants={fadeIn}
-          className="relative flex w-full flex-col gap-5 pb-10 pt-36 md:pb-24"
+          className="relative flex w-full flex-col gap-5 pb-10 pt-36 md:pb-24 lg:items-center"
         >
           <div className="flex items-center gap-4 px-4">
             <h1 className="text-3xl font-bold">Struktur Organisasi</h1>
           </div>
           <div className="flex flex-col gap-4">
-            <div className="absolute left-0 top-24 -z-10 h-48 w-48 rounded-r-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"></div>
             <div className="px-4">
-              <p className="text-muted-foreground">
-                Sebuah organisasi haruslah memiliki struktur anggota yang jelas.
-                Agar dapat berjalan dengan rapi dan terstruktur. Berikut adalah
-                struktur organisasi Karang Taruna Mekar Jadi
+              <p className="max-w-prose text-muted-foreground lg:text-center">
+                Struktur organisasi Karang Taruna Mekar Jadi dibentuk untuk
+                memastikan setiap anggota memiliki peran dan tanggung jawab yang
+                jelas dalam menjalankan program-program organisasi. Dengan
+                struktur yang terorganisir, setiap kegiatan dapat berjalan
+                secara efektif dan efisien.
               </p>
             </div>
           </div>

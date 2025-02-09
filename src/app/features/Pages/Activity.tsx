@@ -39,7 +39,7 @@ const DataActivity: DataActivity = [
   {
     title: "17 Agustus 2023",
     description:
-      "Perayaan ulang tahun republik indonesia ke-73. Dalam perayaan tersebut karang taruna mekar mengajak semua element untuk bergabung dalam keseruannya. Maka dari itu Karang Taruna Mekar Jadi mengadakan lomba lomba yang seru dan menarik, untuk semua kalangan",
+      "Dalam rangka merayakan HUT ke-73 Republik Indonesia, Karang Taruna Mekar Jadi mengajak seluruh elemen masyarakat untuk turut serta dalam kemeriahan acara. Untuk memeriahkan perayaan ini, kami mengadakan berbagai lomba yang seru dan menarik, yang dapat diikuti oleh semua kalangan. Mari bergabung dan rayakan semangat kebersamaan serta kebanggaan sebagai bangsa Indonesia! 🇮🇩✨",
     image: [
       "/images/kegiatan1/1.jpg",
       "/images/kegiatan1/2.jpg",
@@ -49,7 +49,7 @@ const DataActivity: DataActivity = [
   {
     title: "Voli Antar Dusun 2024",
     description:
-      "Voli antar dusun Kwadungan yang sukses diselenggarakan oleh Karang Taruna Mekar Jadi Domas, Voli ini mempertemukan semua team dusun Kwadungan, Putri dan Putra. ",
+      "Turnamen voli antar dusun Kwadungan yang sukses diselenggarakan oleh Karang Taruna Mekar Jadi Domas menjadi ajang kebersamaan dan sportivitas. Kompetisi ini mempertemukan tim voli putra dan putri dari berbagai dusun di Kwadungan, menciptakan pertandingan yang seru, penuh semangat, dan menjalin silaturahmi antar warga. 🏐🔥 ",
     image: [
       "/images/kegiatan2/1.jpg",
       "/images/kegiatan2/2.jpg",
@@ -59,7 +59,7 @@ const DataActivity: DataActivity = [
   {
     title: "17 Agustus 2024",
     description:
-      "Perayaan ulang tahun republik indonesia ke-74. Dalam perayaan yang selalu hadir setiap tahunnya, dengan moment yang tepat kami menyelanggarakan panggung bagi para warga domas. Dalam acara ini kami mengundang element warga untuk turut memberikan penampilan yang menarik.",
+      "Perayaan ulang tahun ke-74 Republik Indonesia menjadi momen spesial yang selalu dinantikan setiap tahunnya. Dalam semangat kebersamaan, Karang Taruna Mekar Jadi Domas menyelenggarakan panggung hiburan bagi seluruh warga. Acara ini menghadirkan berbagai penampilan menarik dari warga Domas, menciptakan suasana meriah dan penuh semangat persatuan. 🎉🇮🇩",
     image: [
       "/images/kegiatan1/1.jpg",
       "/images/kegiatan1/2.jpg",

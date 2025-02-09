@@ -12,7 +12,7 @@ const Footer = () => {
           </Link>
           <h2 className="font-semibold">Kartar Mekar Jadi</h2>
           <p className="text-muted-foreground">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            &quot;Bersatu, Berkarya, Maju Bersama!&quot; 🚀🔥
           </p>
         </div>
         <div className="flex w-full flex-row flex-wrap gap-16 px-10 md:pt-24">
@@ -32,7 +32,7 @@ const Footer = () => {
             </Link>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="/contact"
+              href="https://github.com/Kuroi-RE"
             >
               shakuroi.dev
             </Link>
@@ -47,7 +47,7 @@ const Footer = () => {
             </Link>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="/contact"
+              href="/event"
             >
               Berita & Event
             </Link>
@@ -56,19 +56,19 @@ const Footer = () => {
             <h1 className="font-semibold uppercase">Media Sosial</h1>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="/about"
+              href="https://www.instagram.com/mekarjadi.offc/"
             >
               Instagram
             </Link>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="/contact"
+              href="https://www.instagram.com/mekarjadi.offc/"
             >
               Youtube
             </Link>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="/contact"
+              href="https://linktr.ee/kartarmj"
             >
               LinkTree
             </Link>

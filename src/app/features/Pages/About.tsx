@@ -53,15 +53,23 @@ const About = () => {
           ></motion.div>
 
           <motion.div className="px-4 lg:px-10" variants={fadeIn}>
-            <h2 className="lg:text-xl">
-              Kami adalah pemuda-pemudi dusun domas, kami bekerja sama untuk
-              membangun dusun domas menjadi lebih maju.
+            <h2 className="line-clamp-2 lg:text-xl">
+              Mewujudkan Karang Taruna Mekar Jadi sebagai organisasi kepemudaan
+              yang mandiri, kreatif, dan inovatif dalam membangun masyarakat
+              yang berdaya saing, harmonis, dan sejahtera.
             </h2>
-            <p className="lg:text-md text-muted-foreground">
-              Kami memiliki tujuan untuk membangun dusun domas menjadi dusun
-              yang memiliki keinginan untuk maju lorem ipsum lorem lorem ipsum,
-              untuk itu kami ada disini untuk bertukar pemikiran demi kemajuan
-              dusun domas.
+            <p className="lg:text-md line-clamp-3 text-muted-foreground">
+              Karang Taruna Mekar Jadi hadir sebagai wadah bagi pemuda-pemudi
+              Dusun Domas untuk berperan aktif dalam pembangunan sosial,
+              ekonomi, dan budaya di lingkungan sekitar. Kami berkomitmen untuk
+              menciptakan generasi muda yang memiliki semangat gotong royong,
+              kepedulian sosial, dan kemampuan berinovasi guna menghadapi
+              tantangan masa depan. Melalui berbagai program dan kegiatan, kami
+              mendorong partisipasi aktif dalam pengembangan keterampilan,
+              kewirausahaan, serta kepemimpinan yang bertanggung jawab. Dengan
+              memperkuat solidaritas dan kerja sama, kami yakin bahwa Dusun
+              Domas dapat berkembang menjadi lingkungan yang lebih maju,
+              mandiri, dan sejahtera bagi seluruh masyarakat.
             </p>
           </motion.div>
 
