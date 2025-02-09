@@ -1,4 +1,9 @@
-import { useSprings, animated, SpringConfig } from "@react-spring/web";
+import {
+  useSprings,
+  animated,
+  SpringConfig,
+  SpringValue,
+} from "@react-spring/web";
 import { useEffect, useRef, useState } from "react";
 
 interface SplitTextProps {
@@ -35,7 +40,7 @@ const SplitText: React.FC<SplitTextProps> = ({
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setInView(true);
           if (ref.current) {
             observer.unobserve(ref.current);
@@ -57,19 +62,22 @@ const SplitText: React.FC<SplitTextProps> = ({
     letters.map((_, i) => ({
       from: animationFrom,
       to: inView
-        ? async (next: (props: any) => Promise<void>) => {
-            await next(animationTo);
-            animatedCount.current += 1;
-            if (
-              animatedCount.current === letters.length &&
-              onLetterAnimationComplete
-            ) {
-              onLetterAnimationComplete();
-            }
+        ? {
+            opacity: animationTo.opacity,
+            transform: animationTo.transform,
+            delay: i * delay,
+            config: { easing },
           }
         : animationFrom,
-      delay: i * delay,
-      config: { easing },
+      onRest: () => {
+        animatedCount.current += 1;
+        if (
+          animatedCount.current === letters.length &&
+          onLetterAnimationComplete
+        ) {
+          onLetterAnimationComplete();
+        }
+      },
     })),
   );
 

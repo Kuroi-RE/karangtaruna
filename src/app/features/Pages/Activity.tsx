@@ -96,7 +96,7 @@ const Activity = () => {
   return (
     <section
       id="kegiatan"
-      className="flex min-h-[50vh] w-full flex-col bg-blueSea-foreground text-black dark:bg-[#1a3b52] dark:text-white"
+      className="flex min-h-[60vh] w-full flex-col bg-blueSea-foreground text-black dark:bg-[#1a3b52] dark:text-white"
     >
       <div className="flex flex-col place-items-center gap-4 py-2">
         <motion.div
@@ -132,7 +132,7 @@ const Activity = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-col gap-4 md:flex-row md:flex-wrap md:justify-center"
+          className="flex flex-col gap-4 pb-24 md:flex-row md:flex-wrap md:justify-center"
         >
           {DataActivity.map((data, index) => (
             <AlertDialog key={index}>

@@ -14,14 +14,14 @@ import {
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
 
-const images = [
-  "/images/kegiatan1/1.jpg",
-  "/images/kegiatan1/2.jpg",
-  "/images/kegiatan1/3.jpg",
-  "/images/kegiatan2/1.jpg",
-  "/images/kegiatan2/2.jpg",
-  "/images/kegiatan2/3.jpg",
-];
+// const images = [
+//   "/images/kegiatan1/1.jpg",
+//   "/images/kegiatan1/2.jpg",
+//   "/images/kegiatan1/3.jpg",
+//   "/images/kegiatan2/1.jpg",
+//   "/images/kegiatan2/2.jpg",
+//   "/images/kegiatan2/3.jpg",
+// ];
 
 import { Button } from "~/components/ui/button";
 import { useToast } from "~/hooks/use-toast";
