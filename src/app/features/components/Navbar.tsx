@@ -66,19 +66,19 @@ export default function Navbar() {
 
           <Link
             className="!font-semibold transition-colors hover:!text-blue-300"
-            href="#about"
+            href="./#about"
           >
             Tentang Kita
           </Link>
           <Link
             className="!font-semibold transition-colors hover:!text-blue-300"
-            href="#kegiatan"
+            href="./#kegiatan"
           >
             Kegiatan
           </Link>
           <Link
             className="!font-semibold transition-colors hover:!text-blue-300"
-            href="#gallery"
+            href="./#gallery"
           >
             Gallery
           </Link>
@@ -116,7 +116,7 @@ export default function Navbar() {
         <Link
           onClick={() => setIsOpen(false)}
           className="!font-semibold transition-colors hover:!text-blue-300"
-          href="#about"
+          href="./#about"
         >
           Tentang Kita
         </Link>
@@ -124,7 +124,7 @@ export default function Navbar() {
         <Link
           onClick={() => setIsOpen(false)}
           className="!font-semibold transition-colors hover:!text-blue-300"
-          href="#kegiatan"
+          href="./#kegiatan"
         >
           Kegiatan
         </Link>
@@ -132,7 +132,7 @@ export default function Navbar() {
         <Link
           onClick={() => setIsOpen(false)}
           className="!font-semibold transition-colors hover:!text-blue-300"
-          href="#gallery"
+          href="./#gallery"
         >
           Gallery
         </Link>

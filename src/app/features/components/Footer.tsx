@@ -20,7 +20,7 @@ const Footer = () => {
             <h1 className="font-semibold uppercase">Company</h1>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="/about"
+              href="./#about"
             >
               Tentang Kita
             </Link>
@@ -41,7 +41,7 @@ const Footer = () => {
             <h1 className="font-semibold uppercase">Resource</h1>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="/about"
+              href="./#gallery"
             >
               Dokumentasi
             </Link>

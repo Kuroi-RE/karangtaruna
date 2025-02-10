@@ -28,7 +28,7 @@ const Timeline = ({ data }: TimelineProps) => {
         <VerticalTimelineElement
           key={index}
           className="vertical-timeline-element--work w-full md:w-[400px] lg:w-full"
-          contentStyle={{ background: "#1e3a8a", color: "#fff" }}
+          contentStyle={{ background: "#1e3a8a", color: "#1e3a8a" }}
           contentArrowStyle={{ borderRight: "7px solid  #1e3a8a" }}
           date={data.date}
           iconStyle={{ background: "#1e3a8a", color: "#fff" }}

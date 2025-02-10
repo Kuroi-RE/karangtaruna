@@ -36,37 +36,37 @@ type StrukturData = {
 const StrukturData: StrukturData = [
   {
     avatar: "/images/kegiatan1/1.jpg",
-    name: "Angga",
+    name: "Unknown",
     role: "Ketua",
-    medsos: "@angga",
+    medsos: "@unknown",
     date: "2020 - present",
   },
   {
     avatar: "/images/kegiatan1/1.jpg",
-    name: "Budi",
+    name: "Unknown",
     role: "Wakil Ketua",
-    medsos: "@budi",
+    medsos: "@unknown",
     date: "2021 - present",
   },
   {
     avatar: "/images/kegiatan1/1.jpg",
-    name: "Citra",
+    name: "Unknown",
     role: "Sekretaris",
-    medsos: "@citra",
+    medsos: "@unknown",
     date: "2019 - present",
   },
   {
     avatar: "/images/kegiatan1/1.jpg",
-    name: "Dewi",
+    name: "Unknown",
     role: "Bendahara",
-    medsos: "@dewi",
+    medsos: "@unknown",
     date: "2022 - present",
   },
   {
     avatar: "/images/kegiatan1/1.jpg",
-    name: "Eko",
+    name: "Unknown",
     role: "Humas",
-    medsos: "@eko",
+    medsos: "@unknown",
     date: "2023 - present",
   },
 ];
@@ -182,7 +182,7 @@ const page = () => {
                 masyarakat sekitar.
               </p>
             </div>
-            <div className="px-4 text-right">
+            <div className="px-4 text-left md:text-right">
               <h2 className="text-xl tracking-wider md:text-2xl lg:text-4xl">
                 Misi
               </h2>

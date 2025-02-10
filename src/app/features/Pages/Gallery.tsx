@@ -14,18 +14,30 @@ import {
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
 
-// const images = [
-//   "/images/kegiatan1/1.jpg",
-//   "/images/kegiatan1/2.jpg",
-//   "/images/kegiatan1/3.jpg",
-//   "/images/kegiatan2/1.jpg",
-//   "/images/kegiatan2/2.jpg",
-//   "/images/kegiatan2/3.jpg",
-// ];
-
 import { Button } from "~/components/ui/button";
 import { useToast } from "~/hooks/use-toast";
 import SplitText from "~/components/SplitText";
+
+const images1 = [
+  "/images/172023/1.jpg",
+  "/images/172023/5.jpg",
+  "/images/172023/3.jpg",
+];
+
+const images2 = [
+  "/images/172024/1.jpg",
+  "/images/172024/2.jpg",
+  "/images/172024/3.jpg",
+];
+
+const images3 = [
+  "/images/172024/5.jpg",
+  "/images/172024/6.jpg",
+  "/images/172024/7.jpg",
+  "/images/172024/8.jpg",
+];
+
+const getRandomSize = () => Math.floor(Math.random() * 101) + 300;
 
 const Gallery = () => {
   const { toast } = useToast();
@@ -56,74 +68,56 @@ const Gallery = () => {
         {/* Masonry Grid */}
         <div className="grid w-full max-w-4xl grid-cols-2 gap-4 md:grid-cols-3">
           <div className="flex flex-col gap-4">
-            <Image
-              src="/images/kegiatan1/1.jpg"
-              width={300}
-              height={400}
-              alt="gallery-1"
-              className="h-[300px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            />
-            <Image
-              src="/images/kegiatan1/2.jpg"
-              width={300}
-              height={200}
-              alt="gallery-2"
-              className="h-[200px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            />
-            <Image
-              src="/images/kegiatan1/3.jpg"
-              width={300}
-              height={200}
-              alt="gallery-3"
-              className="hidden h-[300px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0 md:block"
-            />
+            {images1.map((src, index) => {
+              const randomWidth = getRandomSize();
+              const randomHeight = getRandomSize();
+              return (
+                <div key={index} className="flex flex-col gap-4">
+                  <Image
+                    src={src}
+                    width={randomWidth}
+                    height={randomHeight}
+                    alt={`gallery-${index}`}
+                    className="rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                  />
+                </div>
+              );
+            })}
           </div>
 
           <div className="flex flex-col gap-4">
-            <Image
-              src="/images/kegiatan1/3.jpg"
-              width={300}
-              height={200}
-              alt="gallery-3"
-              className="h-[200px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            />
-            <Image
-              src="/images/kegiatan1/1.jpg"
-              width={300}
-              height={400}
-              alt="gallery-4"
-              className="w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0 md:h-[400px]"
-            />
-            <Image
-              src="/images/kegiatan1/3.jpg"
-              width={300}
-              height={200}
-              alt="gallery-3"
-              className="hidden h-[300px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0 md:block"
-            />
+            {images2.map((src, index) => {
+              const randomWidth = getRandomSize();
+              const randomHeight = getRandomSize();
+              return (
+                <div key={index} className="flex flex-col gap-4">
+                  <Image
+                    src={src}
+                    width={randomWidth}
+                    height={randomHeight}
+                    alt={`gallery-${index}`}
+                    className="rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                  />
+                </div>
+              );
+            })}
           </div>
           <div className="hidden gap-4 md:flex md:flex-col">
-            <Image
-              src="/images/kegiatan1/3.jpg"
-              width={300}
-              height={200}
-              alt="gallery-3"
-              className="h-[300px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            />
-            <Image
-              src="/images/kegiatan1/1.jpg"
-              width={300}
-              height={400}
-              alt="gallery-4"
-              className="h-[300px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            />
-            <Image
-              src="/images/kegiatan1/1.jpg"
-              width={300}
-              height={400}
-              alt="gallery-4"
-              className="h-[300px] w-[300px] rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            />
+            {images3.map((src, index) => {
+              // const randomWidth = getRandomSize();
+              const randomHeight = getRandomSize();
+              return (
+                <div key={index} className="flex flex-col gap-4">
+                  <Image
+                    src={src}
+                    width={400}
+                    height={randomHeight}
+                    alt={`gallery-${index}`}
+                    className="rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
         <div>
