@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.7 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
 };
 
 const About = () => {

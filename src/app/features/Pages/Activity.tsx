@@ -75,10 +75,10 @@ const fadeIn = (delay: number) => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay } },
 });
 
-const fadeInUp = {
+const fadeInUp = (delay: number) => ({
   hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, delay } },
+});
 
 const Activity = () => {
   const { toast } = useToast();
@@ -119,12 +119,12 @@ const Activity = () => {
           className="w-full py-24 text-center"
         >
           <motion.span
-            variants={fadeInUp}
+            variants={fadeInUp(0.9)}
             className="text-sm text-muted-foreground dark:text-blueSea-mute md:text-xl"
           >
             Apa yang kita lakukan?
           </motion.span>
-          <h1>
+          <motion.h1 variants={fadeInUp(0.9)}>
             <SplitText
               text="Kegiatan yang terlaksana"
               className="text-xl font-bold md:text-3xl lg:text-4xl"
@@ -134,7 +134,7 @@ const Activity = () => {
               threshold={0.2}
               rootMargin="-50px"
             />
-          </h1>
+          </motion.h1>
         </motion.div>
 
         <motion.div

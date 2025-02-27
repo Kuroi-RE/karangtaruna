@@ -40,7 +40,7 @@ const Hero = () => {
             text="Karang Taruna Mekar Jadi adalah organisasi pemuda-pemudi Dusun
             Domas. Organisasi ini bertujuan untuk membantu kemajuan Dusun Domas
             melalui pemikiran dan aksi nyata dari para muda-mudi."
-            speed={30} // Kecepatan mengetik
+            speed={10} // Kecepatan mengetik
             delay={1500} // Jeda antar teks
             loop={false} // Looping terus-menerus
           />
