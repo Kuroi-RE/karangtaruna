@@ -1,17 +1,43 @@
 import Link from "next/link";
+import { type Metadata } from "next";
 import FormContact from "../features/components/FormContact";
+import JsonLd from "~/components/JsonLd";
+import { breadcrumbSchema, localBusinessSchema } from "~/lib/schema";
+
+export const metadata: Metadata = {
+  title: "Hubungi Kami",
+  description:
+    "Hubungi Karang Taruna Mekar Jadi Dusun Domas. Kirim pertanyaan, saran, atau ajakan kerja sama melalui formulir kontak atau media sosial kami.",
+  alternates: { canonical: "/contact" },
+};
 
 const pages = () => {
   return (
     <section className="flex min-h-screen w-full flex-col items-center justify-center gap-10 py-24 lg:flex-row lg:items-start lg:justify-evenly">
+      <JsonLd
+        data={[
+          localBusinessSchema,
+          breadcrumbSchema([
+            { name: "Beranda", path: "/" },
+            { name: "Hubungi Kami", path: "/contact" },
+          ]),
+        ]}
+      />
       <div className="flex flex-col gap-2 px-4 md:items-center md:text-center lg:max-w-sm lg:items-start lg:pt-24 lg:text-start">
-        <h1 className="text-3xl font-bold lg:text-5xl">Hubungi Kami</h1>
+        <h1 className="font-display text-3xl font-bold lg:text-5xl">
+          Hubungi <span className="text-merah">Kami</span>
+        </h1>
         <p className="text-muted-foreground md:max-w-lg">
           Jika Anda memiliki pertanyaan atau ingin berkontribusi, jangan ragu
           untuk menghubungi kami. Kami siap mendengar dan bekerja sama demi
           kemajuan bersama.
         </p>
-        <span className="text-muted-foreground">kartar@gmail.com</span>
+        <a
+          href="mailto:kartarmj@gmail.com"
+          className="text-muted-foreground hover:text-merah"
+        >
+          kartarmj@gmail.com
+        </a>
         <div className="flex gap-3">
           <Link href="https://instagram.com/mekarjadi.offc">
             <svg

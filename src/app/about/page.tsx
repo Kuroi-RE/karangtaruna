@@ -1,28 +1,18 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import React from "react";
-
-import { motion } from "framer-motion";
-
-const ParticleBackground = dynamic(
-  () => import("~/components/ParticleBackground"),
-  { ssr: false, loading: () => <p>Loading</p> },
-);
-const Timeline = dynamic(() => import("~/components/Timeline"), {
-  ssr: false,
-  loading: () => <p>Loading</p>,
-});
-
-const Misi = dynamic(() => import("~/components/Misi"), {
-  ssr: false,
-  loading: () => <p>Loading</p>,
-});
+import { type Metadata } from "next";
+import ParticleBackground from "~/components/ParticleBackground";
+import Timeline from "~/components/Timeline";
+import Misi from "~/components/Misi";
 import SplitText from "~/components/SplitText";
+import Reveal from "~/components/Reveal";
+import JsonLd from "~/components/JsonLd";
+import { breadcrumbSchema } from "~/lib/schema";
 
-const fadeIn = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.7 } },
+export const metadata: Metadata = {
+  title: "Tentang Kami",
+  description:
+    "Mengenal Karang Taruna Mekar Jadi Dusun Domas: visi, misi, dan struktur organisasi kepemudaan yang mandiri, kreatif, dan inovatif.",
+  alternates: { canonical: "/about" },
 };
 
 type StrukturData = {
@@ -71,31 +61,26 @@ const StrukturData: StrukturData = [
   },
 ];
 
-const page = () => {
+const AboutPage = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0.5, y: 20 }} // Tidak hilang total, tapi tetap ada efek masuk
-      whileInView={{ opacity: 1, y: 0 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.2 }}
-      className="relative py-24"
-    >
-      <div className="absolute left-0 top-0 -z-10 h-full w-full">
-        <ParticleBackground type="cobweb" />
-      </div>
+    <div className="relative py-24">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Beranda", path: "/" },
+          { name: "Tentang Kami", path: "/about" },
+        ])}
+      />
+      <ParticleBackground />
+
       <section
         id="about"
         className="flex min-h-[70vh] flex-col text-black dark:text-white"
       >
         <div className="relative flex w-full flex-col gap-7 pb-36 pt-24 md:grid md:grid-cols-2 md:grid-rows-1 lg:divide-x-2">
-          {/* Bagian Kiri */}
-          <motion.div
-            className="relative flex items-center gap-5 px-4 md:h-full lg:pl-16"
-            variants={fadeIn}
-          >
-            <h1 className="text-3xl font-bold md:self-start md:text-4xl lg:pt-5 lg:text-6xl">
-              Siapa Kita?
+          {/* Left */}
+          <Reveal className="relative flex items-center gap-5 px-4 md:h-full lg:pl-16">
+            <h1 className="font-display text-3xl font-bold md:self-start md:text-4xl lg:pt-5 lg:text-6xl">
+              Siapa <span className="text-merah">Kita?</span>
             </h1>
 
             <svg
@@ -109,20 +94,17 @@ const page = () => {
                 stroke="#00A9FF"
               />
             </svg>
-          </motion.div>
+          </Reveal>
 
-          {/* Bagian Kanan */}
-          <motion.div
+          {/* Right */}
+          <Reveal
             className="relative flex flex-col gap-4 md:max-w-full md:pt-10 lg:max-w-full"
-            variants={fadeIn}
+            stagger={0.15}
           >
-            <motion.div
-              className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"
-              variants={fadeIn}
-            ></motion.div>
+            <div className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"></div>
 
-            <motion.div className="px-4 lg:px-10" variants={fadeIn}>
-              <h2 className="lg:text-xl">
+            <div className="px-4 lg:px-10">
+              <h2 className="text-lg font-medium lg:text-xl">
                 Mewujudkan Karang Taruna Mekar Jadi sebagai organisasi
                 kepemudaan yang mandiri, kreatif, dan inovatif dalam membangun
                 masyarakat yang berdaya saing, harmonis, dan sejahtera.
@@ -140,22 +122,23 @@ const page = () => {
                 bahwa Dusun Domas dapat berkembang menjadi lingkungan yang lebih
                 maju, mandiri, dan sejahtera bagi seluruh masyarakat.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </Reveal>
         </div>
       </section>
+
       <section
         id="visi-misi"
         className="flex min-h-[70vh] flex-col text-black dark:text-white"
       >
         <div className="flex w-full flex-col gap-16 pb-36">
-          <motion.div
-            variants={fadeIn}
+          <Reveal
+            stagger={0.15}
             className="relative flex flex-col items-center gap-4 px-4"
           >
-            <h1 className="text-3xl font-bold md:text-4xl lg:text-6xl">
-              Visi & Misi
-            </h1>
+            <h2 className="font-display text-3xl font-bold md:text-4xl lg:text-6xl">
+              Visi & <span className="text-merah">Misi</span>
+            </h2>
             <p className="max-w-prose text-center text-muted-foreground md:px-4 md:text-lg">
               Visi dan misi merupakan landasan utama bagi sebuah organisasi.
               Keduanya mencerminkan arah, tujuan, serta komitmen dalam
@@ -163,15 +146,12 @@ const page = () => {
               dan misi yang terstruktur, organisasi dapat tumbuh dan berkembang
               secara berkelanjutan.
             </p>
-          </motion.div>
-          <motion.div
-            variants={fadeIn}
-            className="relative flex flex-col gap-4"
-          >
+          </Reveal>
+          <Reveal stagger={0.15} className="relative flex flex-col gap-4">
             <div className="px-4">
-              <h2 className="text-xl tracking-wider md:text-2xl lg:text-4xl">
+              <h3 className="text-xl tracking-wider md:text-2xl lg:text-4xl">
                 Visi
-              </h2>
+              </h3>
               <p className="max-w-prose text-sm text-muted-foreground md:text-lg">
                 Menjadikan Karang Taruna Mekar Jadi sebagai organisasi
                 kepemudaan yang mandiri, kreatif, dan inovatif, serta berperan
@@ -183,54 +163,51 @@ const page = () => {
               </p>
             </div>
             <div className="px-4 text-left md:text-right">
-              <h2 className="text-xl tracking-wider md:text-2xl lg:text-4xl">
+              <h3 className="text-xl tracking-wider md:text-2xl lg:text-4xl">
                 Misi
-              </h2>
+              </h3>
               <div className="flex w-full justify-end text-muted-foreground">
                 <Misi />
               </div>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      <div className="flex min-h-[300px] w-full items-center justify-center bg-gradient-to-r from-primary to-blueSea-foreground dark:from-primary dark:to-blue-800">
+      <div className="flex min-h-[300px] w-full items-center justify-center bg-gradient-to-r from-primary via-blueSea to-merah dark:from-primary dark:via-blue-800 dark:to-merah-dark">
         <SplitText
-          text="“Domas Gumebyar, Indonesia Sumunar! Domas Guyub, Indonesia Murub!”"
-          className="text-center text-3xl font-bold italic dark:text-white lg:text-6xl"
-          delay={50}
-          animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
-          animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
-          threshold={0.2}
-          rootMargin="-50px"
+          as="p"
+          text="Domas Gumebyar, Indonesia Sumunar! Domas Guyub, Indonesia Murub!"
+          className="px-4 text-center font-display text-2xl font-bold italic text-white lg:text-5xl"
+          stagger={0.02}
         />
       </div>
 
-      {/* Timeline */}
+      {/* Struktur Organisasi */}
       <div>
-        <motion.div
-          variants={fadeIn}
+        <Reveal
+          stagger={0.15}
           className="relative flex w-full flex-col gap-5 pb-10 pt-36 md:pb-24 lg:items-center"
         >
           <div className="flex items-center gap-4 px-4">
-            <h1 className="text-3xl font-bold">Struktur Organisasi</h1>
+            <h2 className="font-display text-3xl font-bold">
+              Struktur Organisasi
+            </h2>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="px-4">
-              <p className="max-w-prose text-muted-foreground lg:text-center">
-                Struktur organisasi Karang Taruna Mekar Jadi dibentuk untuk
-                memastikan setiap anggota memiliki peran dan tanggung jawab yang
-                jelas dalam menjalankan program-program organisasi. Dengan
-                struktur yang terorganisir, setiap kegiatan dapat berjalan
-                secara efektif dan efisien.
-              </p>
-            </div>
+          <div className="px-4">
+            <p className="max-w-prose text-muted-foreground lg:text-center">
+              Struktur organisasi Karang Taruna Mekar Jadi dibentuk untuk
+              memastikan setiap anggota memiliki peran dan tanggung jawab yang
+              jelas dalam menjalankan program-program organisasi. Dengan
+              struktur yang terorganisir, setiap kegiatan dapat berjalan secara
+              efektif dan efisien.
+            </p>
           </div>
-        </motion.div>
+        </Reveal>
         <Timeline data={StrukturData} />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
-export default page;
+export default AboutPage;

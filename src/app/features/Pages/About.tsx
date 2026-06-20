@@ -1,33 +1,20 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
 import { Button } from "~/components/ui/button";
-import { motion } from "framer-motion";
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } },
-};
+import Reveal from "~/components/Reveal";
 
 const About = () => {
   return (
-    <motion.section
+    <section
       id="about"
       className="flex min-h-[70vh] flex-col text-black dark:text-white"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
     >
       <div className="relative flex w-full flex-col gap-7 pb-36 pt-24 md:grid md:grid-cols-2 md:grid-rows-1 lg:divide-x-2">
-        {/* Bagian Kiri */}
-        <motion.div
-          className="relative flex items-center gap-4 px-4 md:h-full lg:pl-16"
-          variants={fadeIn}
-        >
-          <h1 className="text-3xl font-bold md:self-start md:text-4xl lg:pt-5 lg:text-6xl">
-            Siapa Kita?
-          </h1>
+        {/* Left */}
+        <Reveal className="relative flex items-center gap-4 px-4 md:h-full lg:pl-16">
+          <h2 className="font-display text-3xl font-bold md:self-start md:text-4xl lg:pt-5 lg:text-6xl">
+            Siapa <span className="text-merah">Kita?</span>
+          </h2>
 
           <svg
             className="absolute left-28 -z-10 h-[129px] w-[120px] md:-top-5 md:left-36 lg:left-80 lg:top-0"
@@ -40,52 +27,44 @@ const About = () => {
               stroke="#00A9FF"
             />
           </svg>
-        </motion.div>
+        </Reveal>
 
-        {/* Bagian Kanan */}
-        <motion.div
+        {/* Right */}
+        <Reveal
           className="relative flex flex-col gap-4 md:max-w-full md:pt-10 lg:max-w-full"
-          variants={fadeIn}
+          stagger={0.15}
         >
-          <motion.div
-            className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"
-            variants={fadeIn}
-          ></motion.div>
+          <div className="absolute right-0 top-10 -z-10 h-48 w-48 rounded-l-full bg-blueSea-foreground dark:bg-zinc-900 sm:w-72"></div>
 
-          <motion.div className="px-4 lg:px-10" variants={fadeIn}>
-            <h2 className="line-clamp-2 lg:text-xl">
+          <div className="px-4 lg:px-10">
+            <h3 className="line-clamp-2 text-lg font-medium lg:text-xl">
               Mewujudkan Karang Taruna Mekar Jadi sebagai organisasi kepemudaan
               yang mandiri, kreatif, dan inovatif dalam membangun masyarakat
               yang berdaya saing, harmonis, dan sejahtera.
-            </h2>
+            </h3>
             <p className="lg:text-md line-clamp-3 text-muted-foreground">
               Karang Taruna Mekar Jadi hadir sebagai wadah bagi pemuda-pemudi
               Dusun Domas untuk berperan aktif dalam pembangunan sosial,
               ekonomi, dan budaya di lingkungan sekitar. Kami berkomitmen untuk
               menciptakan generasi muda yang memiliki semangat gotong royong,
               kepedulian sosial, dan kemampuan berinovasi guna menghadapi
-              tantangan masa depan. Melalui berbagai program dan kegiatan, kami
-              mendorong partisipasi aktif dalam pengembangan keterampilan,
-              kewirausahaan, serta kepemimpinan yang bertanggung jawab. Dengan
-              memperkuat solidaritas dan kerja sama, kami yakin bahwa Dusun
-              Domas dapat berkembang menjadi lingkungan yang lebih maju,
-              mandiri, dan sejahtera bagi seluruh masyarakat.
+              tantangan masa depan.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div className="pl-4 lg:pl-10" variants={fadeIn}>
+          <div className="pl-4 lg:pl-10">
             <Link href="/about">
               <Button
                 variant="outline"
-                className="border-blueSea text-primary hover:bg-primary"
+                className="border-merah text-merah hover:bg-merah hover:text-merah-foreground"
               >
                 Selengkapnya
               </Button>
             </Link>
-          </motion.div>
-        </motion.div>
+          </div>
+        </Reveal>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

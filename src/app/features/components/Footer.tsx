@@ -32,7 +32,7 @@ const Footer = () => {
             </Link>
             <Link
               className="text-muted-foreground hover:text-primary"
-              href="https://github.com/Kuroi-RE"
+              href="https://shaa.dev"
             >
               shakuroi.dev
             </Link>

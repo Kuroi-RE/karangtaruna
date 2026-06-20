@@ -2,24 +2,33 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 import { Button } from "~/components/ui/button";
 import WriterText from "~/components/WriteText";
+import Reveal from "~/components/Reveal";
 
 const Hero = () => {
   return (
     <section className="flex min-h-screen w-full items-center justify-center px-4 pt-0 md:px-8 md:pt-24 lg:px-16">
-      <div className="grid w-full grid-cols-1 gap-10 rounded-lg bg-gradient-to-tr from-blueSea via-blueSea-foreground to-blueSea-mute py-10 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-700 md:grid-cols-2 md:py-16 lg:py-20 xl:py-24">
-        {/* Bagian Kiri - Text & Button */}
-        <div className="relative flex flex-col gap-6 px-6 md:px-10 lg:px-16">
-          <div className="max-w-[85%]">
-            <h1 className="text-3xl font-bold text-black dark:text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              Karang Taruna <span className="text-red-500">Mekar Jadi</span>
+      <div className="grid w-full grid-cols-1 gap-10 rounded-2xl bg-gradient-to-tr from-blueSea via-blueSea-foreground to-blueSea-mute py-10 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-700 md:grid-cols-2 md:py-16 lg:py-20 xl:py-24">
+        {/* Left - Text & Button */}
+        <Reveal
+          stagger={0.18}
+          y={30}
+          className="relative flex flex-col gap-6 px-6 md:px-10 lg:px-16"
+        >
+          <div className="max-w-[90%]">
+            <span className="mb-2 inline-block rounded-full bg-merah/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-merah">
+              Dusun Domas
+            </span>
+            <h1 className="font-display text-3xl font-extrabold text-black dark:text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              Karang Taruna <span className="text-merah">Mekar Jadi</span>
             </h1>
             <svg
-              className="absolute left-10 top-14 mt-2 w-[150px] sm:w-[180px] md:hidden md:w-[220px] lg:w-[250px]"
+              className="absolute left-10 top-20 mt-2 w-[150px] sm:w-[180px] md:hidden md:w-[220px] lg:w-[250px]"
               width="200"
               height="22"
               viewBox="0 0 486 22"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"
@@ -30,40 +39,39 @@ const Hero = () => {
             </svg>
           </div>
 
-          {/* <p className="max-w-72 text-base text-zinc-600 dark:text-zinc-400 sm:max-w-80 md:max-w-96 lg:text-lg">
-            Karang Taruna Mekar Jadi adalah organisasi pemuda-pemudi Dusun
-            Domas. Organisasi ini bertujuan untuk membantu kemajuan Dusun Domas
-            melalui pemikiran dan aksi nyata dari para muda-mudi.
-          </p> */}
           <WriterText
             className="max-w-72 text-base text-zinc-600 dark:text-zinc-400 sm:max-w-80 md:max-w-96 lg:text-lg"
-            text="Karang Taruna Mekar Jadi adalah organisasi pemuda-pemudi Dusun
-            Domas. Organisasi ini bertujuan untuk membantu kemajuan Dusun Domas
-            melalui pemikiran dan aksi nyata dari para muda-mudi."
-            speed={10} // Kecepatan mengetik
-            delay={1500} // Jeda antar teks
-            loop={false} // Looping terus-menerus
+            text="Karang Taruna Mekar Jadi adalah organisasi pemuda-pemudi Dusun Domas. Organisasi ini bertujuan untuk membantu kemajuan Dusun Domas melalui pemikiran dan aksi nyata dari para muda-mudi."
+            speed={10}
+            delay={1500}
+            loop={false}
           />
 
           <div className="flex gap-4">
             <Link href="#about">
-              <Button className="bg-blueSea px-6 py-3 text-sm dark:bg-background md:text-base">
+              <Button className="bg-merah px-6 py-3 text-sm text-merah-foreground hover:bg-merah-dark md:text-base">
                 Kenal Kami
               </Button>
             </Link>
-            <Button className="bg-blueSea px-6 py-3 text-sm dark:bg-background md:text-base">
-              Hubungi Kami
-            </Button>
+            <Link href="/contact">
+              <Button
+                variant="outline"
+                className="border-primary px-6 py-3 text-sm text-primary hover:bg-primary hover:text-primary-foreground md:text-base"
+              >
+                Hubungi Kami
+              </Button>
+            </Link>
           </div>
-        </div>
+        </Reveal>
 
-        {/* Bagian Kanan - Google Maps */}
+        {/* Right - Google Maps */}
         <div className="flex w-full items-center justify-center px-6 md:px-10 lg:px-16">
           <Suspense fallback={<div>Loading...</div>}>
             <iframe
+              title="Lokasi Dusun Domas"
               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d751.9344309573312!2d111.0553087895999!3d-7.533345466033228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1738957390862!5m2!1sid!2sid"
               loading="lazy"
-              className="h-[300px] w-full rounded-md sm:h-[350px] md:h-[400px] md:w-[500px] lg:h-[450px] lg:w-[600px] xl:h-[500px] xl:w-[700px]"
+              className="h-[300px] w-full rounded-xl sm:h-[350px] md:h-[400px] md:w-[500px] lg:h-[450px] lg:w-[600px] xl:h-[500px] xl:w-[700px]"
             ></iframe>
           </Suspense>
         </div>

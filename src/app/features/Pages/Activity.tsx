@@ -1,4 +1,6 @@
-import { ArrowUpRight, Volleyball } from "lucide-react";
+"use client";
+
+import { ArrowUpRight, Volleyball, ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useState } from "react";
 import {
   Card,
@@ -7,8 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -23,6 +23,7 @@ import Image from "next/image";
 import { Button } from "~/components/ui/button";
 import { useToast } from "~/hooks/use-toast";
 import SplitText from "~/components/SplitText";
+import Reveal from "~/components/Reveal";
 
 type DataActivityType = {
   title: string;
@@ -69,17 +70,6 @@ const DataActivity: DataActivityType = [
   },
 ];
 
-// Motion Variants
-const fadeIn = (delay: number) => ({
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay } },
-});
-
-const fadeInUp = (delay: number) => ({
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.9, delay } },
-});
-
 const Activity = () => {
   const { toast } = useToast();
   const [currentSlides, setCurrentSlides] = useState<Record<number, number>>(
@@ -112,59 +102,41 @@ const Activity = () => {
       className="flex min-h-[60vh] w-full flex-col bg-blueSea-foreground text-black dark:bg-[#1a3b52] dark:text-white"
     >
       <div className="flex flex-col place-items-center gap-4 py-2">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="w-full py-24 text-center"
-        >
-          <motion.span
-            variants={fadeInUp(0.9)}
-            className="text-sm text-muted-foreground dark:text-blueSea-mute md:text-xl"
-          >
+        <div className="w-full py-24 text-center">
+          <span className="text-sm font-semibold uppercase tracking-wider text-merah md:text-base">
             Apa yang kita lakukan?
-          </motion.span>
-          <motion.h1 variants={fadeInUp(0.9)}>
-            <SplitText
-              text="Kegiatan yang terlaksana"
-              className="text-xl font-bold md:text-3xl lg:text-4xl"
-              delay={50}
-              animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
-              animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
-              threshold={0.2}
-              rootMargin="-50px"
-            />
-          </motion.h1>
-        </motion.div>
+          </span>
+          <SplitText
+            as="h2"
+            text="Kegiatan yang terlaksana"
+            className="font-display text-xl font-bold md:text-3xl lg:text-4xl"
+          />
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+        <Reveal
+          stagger={0.15}
           className="flex flex-col gap-4 pb-24 md:flex-row md:flex-wrap md:justify-center"
         >
           {DataActivity.map((data, index) => (
             <AlertDialog key={index}>
               <AlertDialogTrigger asChild>
-                <motion.div variants={fadeIn(index * 0.2)}>
-                  <Card className="flex w-[300px] flex-col gap-12 border-none bg-blueSea-mute dark:bg-[#03346E]">
-                    <CardHeader className="flex flex-row items-center justify-between">
-                      <CardTitle>
-                        <Volleyball size={35} />
-                      </CardTitle>
-                      <CardDescription>
-                        <ArrowUpRight size={30} />
-                      </CardDescription>
-                    </CardHeader>
+                <Card className="flex w-[300px] cursor-pointer flex-col gap-12 border-none bg-blueSea-mute transition-transform hover:-translate-y-1 dark:bg-[#03346E]">
+                  <CardHeader className="flex flex-row items-center justify-between">
+                    <CardTitle>
+                      <Volleyball size={35} className="text-merah" />
+                    </CardTitle>
+                    <CardDescription>
+                      <ArrowUpRight size={30} />
+                    </CardDescription>
+                  </CardHeader>
 
-                    <CardContent>
-                      <h1 className="font-semibold">{data.title}</h1>
-                      <p className="line-clamp-3 text-muted-foreground">
-                        {data.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  <CardContent>
+                    <h3 className="font-semibold">{data.title}</h3>
+                    <p className="line-clamp-3 text-muted-foreground">
+                      {data.description}
+                    </p>
+                  </CardContent>
+                </Card>
               </AlertDialogTrigger>
 
               <AlertDialogContent className="bg-blueSea-mute dark:bg-[#03346E]">
@@ -181,20 +153,22 @@ const Activity = () => {
                         "/images/172023/1.jpg"
                       }
                       width={250}
-                      height={100}
-                      alt="Activity Image"
+                      height={320}
+                      alt={`Dokumentasi kegiatan ${data.title}`}
                       className="h-80 object-cover"
                     />
 
                     <div className="mt-4 flex gap-4">
                       <button
+                        aria-label="Foto sebelumnya"
                         onClick={() => prevSlide(index, data.images.length)}
                         className="rounded-full bg-black/50 p-2 text-white hover:bg-black/70 md:absolute md:left-0 md:top-1/2 md:-translate-y-1/2 md:transform lg:left-5"
                       >
                         <ChevronLeft size={24} />
                       </button>
                       <button
-                        onClick={() => prevSlide(index, data.images.length)}
+                        aria-label="Foto berikutnya"
+                        onClick={() => nextSlide(index, data.images.length)}
                         className="rounded-full bg-black/50 p-2 text-white hover:bg-black/70 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:transform lg:right-5"
                       >
                         <ChevronRight size={24} />
@@ -216,7 +190,7 @@ const Activity = () => {
               </AlertDialogContent>
             </AlertDialog>
           ))}
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );

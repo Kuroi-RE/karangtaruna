@@ -18,6 +18,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],
+        display: ["var(--font-display)", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -47,6 +48,12 @@ export default {
           DEFAULT: "#89CFF3",
           foreground: "#B7EFFE",
           mute: "#CDF5FD",
+        },
+        merah: {
+          DEFAULT: "#E63946",
+          foreground: "#FFF1F2",
+          dark: "#B5232F",
+          soft: "#F87B85",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

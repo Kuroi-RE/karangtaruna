@@ -1,120 +1,90 @@
 "use client";
 
-import {
-  useSprings,
-  animated,
-  SpringConfig,
-  SpringValue,
-} from "@react-spring/web";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { gsap, useGSAP } from "~/lib/gsap";
 
 interface SplitTextProps {
   text?: string;
   className?: string;
-  delay?: number;
-  animationFrom?: { opacity: number; transform: string };
-  animationTo?: { opacity: number; transform: string };
-  easing?: SpringConfig["easing"];
-  threshold?: number;
-  rootMargin?: string;
-  textAlign?: "left" | "right" | "center" | "justify" | "start" | "end";
-  onLetterAnimationComplete?: () => void;
+  /** Stagger between characters in seconds. */
+  stagger?: number;
+  /** Tag to render as. */
+  as?: "p" | "h1" | "h2" | "h3" | "span";
+  textAlign?: React.CSSProperties["textAlign"];
 }
 
+/**
+ * Reveals text character-by-character on scroll into view using a GSAP
+ * stagger. Splits manually (no paid SplitText plugin needed) and keeps whole
+ * words unbreakable for clean wrapping. Honors prefers-reduced-motion.
+ */
 const SplitText: React.FC<SplitTextProps> = ({
   text = "",
   className = "",
-  delay = 100,
-  animationFrom = { opacity: 0, transform: "translate3d(0,40px,0)" },
-  animationTo = { opacity: 1, transform: "translate3d(0,0,0)" },
-  easing = (t: number) => t,
-  threshold = 0.1,
-  rootMargin = "-100px",
+  stagger = 0.03,
+  as = "p",
   textAlign = "center",
-  onLetterAnimationComplete,
 }) => {
-  const words = text.split(" ").map((word) => word.split(""));
-  const letters = words.flat();
-  const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLParagraphElement>(null);
-  const animatedCount = useRef(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const words = text.split(" ");
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setInView(true);
-          if (ref.current) {
-            observer.unobserve(ref.current);
-          }
-        }
-      },
-      { threshold, rootMargin },
-    );
+  useGSAP(
+    () => {
+      const chars = ref.current?.querySelectorAll<HTMLElement>(".st-char");
+      if (!chars || chars.length === 0) return;
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [threshold, rootMargin]);
-
-  const springs = useSprings(
-    letters.length,
-    letters.map((_, i) => ({
-      from: animationFrom,
-      to: inView
-        ? {
-            opacity: animationTo.opacity,
-            transform: animationTo.transform,
-            delay: i * delay,
-            config: { easing },
-          }
-        : animationFrom,
-      onRest: () => {
-        animatedCount.current += 1;
-        if (
-          animatedCount.current === letters.length &&
-          onLetterAnimationComplete
-        ) {
-          onLetterAnimationComplete();
-        }
-      },
-    })),
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(chars, {
+          yPercent: 110,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger,
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 85%",
+            once: true,
+          },
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: ref },
   );
 
+  const Tag = as;
+
   return (
-    <p
-      ref={ref}
-      className={`split-parent inline overflow-hidden ${className}`}
-      style={{ textAlign, whiteSpace: "normal", wordWrap: "break-word" }}
+    <Tag
+      ref={ref as never}
+      className={className}
+      style={{ textAlign, display: "block" }}
+      aria-label={text}
     >
-      {words.map((word, wordIndex) => (
+      {words.map((word, wi) => (
         <span
-          key={wordIndex}
+          key={wi}
+          aria-hidden="true"
           style={{ display: "inline-block", whiteSpace: "nowrap" }}
         >
-          {word.map((letter, letterIndex) => {
-            const index =
-              words.slice(0, wordIndex).reduce((acc, w) => acc + w.length, 0) +
-              letterIndex;
-
-            return (
-              <animated.span
-                key={index}
-                style={springs[index] as unknown as React.CSSProperties}
-                className="inline-block transform transition-opacity will-change-transform"
-              >
-                {letter}
-              </animated.span>
-            );
-          })}
-          <span style={{ display: "inline-block", width: "0.3em" }}>
-            &nbsp;
-          </span>
+          {word.split("").map((char, ci) => (
+            <span
+              key={ci}
+              className="st-char"
+              style={{ display: "inline-block", willChange: "transform" }}
+            >
+              {char}
+            </span>
+          ))}
+          {wi < words.length - 1 && (
+            <span style={{ display: "inline-block", width: "0.3em" }}>
+              &nbsp;
+            </span>
+          )}
         </span>
       ))}
-    </p>
+    </Tag>
   );
 };
 

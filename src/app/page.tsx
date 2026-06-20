@@ -1,23 +1,15 @@
-"use client";
-
-import dynamic from "next/dynamic";
-
-const Hero = dynamic(() => import("./features/Pages/Hero"), { ssr: false });
-const About = dynamic(() => import("./features/Pages/About"), { ssr: false });
-const Activity = dynamic(() => import("./features/Pages/Activity"), {
-  ssr: false,
-});
-const Gallery = dynamic(() => import("./features/Pages/Gallery"), {
-  ssr: false,
-});
+import Hero from "./features/Pages/Hero";
+import About from "./features/Pages/About";
+import Activity from "./features/Pages/Activity";
+import Gallery from "./features/Pages/Gallery";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col pt-24 text-white md:pt-0">
+    <div className="flex min-h-screen flex-col pt-24 text-white md:pt-0">
       <Hero />
       <About />
       <Activity />
       <Gallery />
-    </main>
+    </div>
   );
 }
