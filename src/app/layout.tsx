@@ -68,8 +68,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id" className={`${inter.variable} ${jakarta.variable}`}>
-      <body>
+    <html
+      lang="id"
+      suppressHydrationWarning
+      className={`${inter.variable} ${jakarta.variable}`}
+    >
+      <body suppressHydrationWarning>
         <JsonLd data={[organizationSchema, websiteSchema]} />
         <ThemeProvider
           attribute="class"

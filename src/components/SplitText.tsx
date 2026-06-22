@@ -57,7 +57,7 @@ const SplitText: React.FC<SplitTextProps> = ({
 
   return (
     <Tag
-      ref={ref as never}
+      ref={ref}
       className={className}
       style={{ textAlign, display: "block" }}
       aria-label={text}
