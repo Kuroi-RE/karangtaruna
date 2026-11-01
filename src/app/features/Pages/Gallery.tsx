@@ -1,157 +1,64 @@
-"use client";
-
 import Image from "next/image";
-import React, { useRef } from "react";
-import ParticleBackground from "~/components/ParticleBackground";
-import SplitText from "~/components/SplitText";
-import { gsap, ScrollTrigger, useGSAP } from "~/lib/gsap";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "~/components/ui/alert-dialog";
-import { Button } from "~/components/ui/button";
-import { useToast } from "~/hooks/use-toast";
+import Link from "next/link";
+import Reveal from "~/components/Reveal";
+import { getGallery } from "~/lib/api/client";
 
-const galleryImages = [
-  "/images/172023/1.jpg",
-  "/images/172024/1.jpg",
-  "/images/172024/5.jpg",
-  "/images/172023/5.jpg",
-  "/images/172024/2.jpg",
-  "/images/172024/6.jpg",
-  "/images/172023/3.jpg",
-  "/images/172024/3.jpg",
-  "/images/172024/7.jpg",
-  "/images/172024/8.jpg",
-];
-
-const Gallery = () => {
-  const { toast } = useToast();
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const grid = gridRef.current;
-      if (!grid) return;
-
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const items = gsap.utils.toArray<HTMLElement>(grid.children);
-        // Start hidden, then reveal in batches as they enter the viewport.
-        gsap.set(items, { opacity: 0, y: 40 });
-        ScrollTrigger.batch(items, {
-          start: "top 90%",
-          once: true,
-          onEnter: (batch) =>
-            gsap.to(batch, {
-              opacity: 1,
-              y: 0,
-              duration: 0.7,
-              ease: "power3.out",
-              stagger: 0.08,
-              overwrite: true,
-            }),
-        });
-        // Recalculate positions once images have loaded/laid out.
-        ScrollTrigger.refresh();
-      });
-      return () => mm.revert();
-    },
-    { scope: gridRef },
-  );
+export default async function Gallery() {
+  const galleryImages = await getGallery(6);
 
   return (
     <section
       id="gallery"
-      className="relative flex min-h-screen flex-col items-center p-6 py-24"
+      className="section-space scroll-mt-20 overflow-hidden bg-secondary"
     >
-      <ParticleBackground />
+      <div className="site-container">
+        <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+          <div>
+            <p className="eyebrow">Dokumentasi</p>
+            <h2 className="mt-3 font-display text-4xl font-extrabold leading-none sm:text-5xl lg:text-6xl">
+              Potongan dari kegiatan warga.
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-8 text-muted-foreground lg:justify-self-end">
+            Foto yang tampil berasal dari arsip kegiatan yang telah diterbitkan.
+          </p>
+        </div>
 
-      <div className="mb-10 text-center">
-        <span className="text-sm font-semibold uppercase tracking-wider text-merah">
-          Dokumentasi
-        </span>
-        <SplitText
-          as="h2"
-          text="GALLERY"
-          className="font-display text-4xl font-bold text-primary lg:text-5xl"
-        />
-      </div>
+        {galleryImages.length === 0 ? (
+          <p className="mt-12 max-w-2xl leading-7 text-muted-foreground">
+            Galeri belum memiliki foto pilihan. Pengurus dapat menetapkannya
+            lewat panel pengelolaan kegiatan.
+          </p>
+        ) : (
+          <Reveal
+            className="mt-12 columns-2 gap-3 md:columns-3 md:gap-5"
+            stagger={0.08}
+          >
+            {galleryImages.map((image) => (
+              <figure
+                key={image.url}
+                className="mb-3 break-inside-avoid md:mb-5"
+              >
+                <Image
+                  src={image.url}
+                  alt={image.alt ?? `Dokumentasi ${image.activityTitle}`}
+                  width={800}
+                  height={800}
+                  sizes="(max-width: 767px) 48vw, 30vw"
+                  style={{ width: "100%", height: "auto" }}
+                  className="border-2 border-foreground object-cover"
+                />
+              </figure>
+            ))}
+          </Reveal>
+        )}
 
-      {/* Real masonry via CSS columns */}
-      <div
-        ref={gridRef}
-        className="masonry-grid w-full max-w-4xl columns-2 md:columns-3"
-      >
-        {galleryImages.map((src, index) => (
-          <Image
-            key={src}
-            src={src}
-            width={400}
-            height={index % 3 === 0 ? 520 : index % 2 === 0 ? 300 : 400}
-            alt={`Dokumentasi kegiatan Karang Taruna Mekar Jadi ${index + 1}`}
-            className="mb-4 h-auto w-full rounded-lg object-cover grayscale transition-all duration-500 hover:grayscale-0"
-          />
-        ))}
-      </div>
-
-      <div className="mt-10">
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button className="rounded-md bg-merah px-4 py-2 text-merah-foreground hover:bg-merah-dark">
-              Lihat Dokumentasi [Google Drive]
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Dokumentasi [Kartar]</AlertDialogTitle>
-              <AlertDialogDescription>
-                Dokumentasi Kartar yang tersimpan di Google Drive, silahkan
-                pilih dokumentasi sesuai dengan kegiatan yang ingin dilihat.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter className="flex gap-4 md:flex-col">
-              <AlertDialogAction
-                onClick={() =>
-                  window.open(
-                    "https://drive.google.com/drive/folders/1Pa9sEVVXzremmmWOY7pjAO-vOYdBLL_3?usp=drive_link",
-                  )
-                }
-              >
-                17 Agustus 2023
-              </AlertDialogAction>
-              <AlertDialogAction
-                onClick={() => {
-                  toast({ description: "Dokumentasi Tidak Tersedia." });
-                }}
-              >
-                Voli Antar Dusun 2024
-              </AlertDialogAction>
-              <AlertDialogAction
-                onClick={() =>
-                  window.open(
-                    "https://drive.google.com/drive/folders/1KE-lf1L611O1cWn-EdZ2axpW-hGmeoFV?usp=sharing",
-                  )
-                }
-              >
-                17 Agustus 2024
-              </AlertDialogAction>
-              <AlertDialogCancel className="border-merah">
-                Tutup
-              </AlertDialogCancel>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <div className="mt-10 flex justify-end">
+          <Link href="/program-kegiatan" className="text-link">
+            Lihat konteks setiap kegiatan
+          </Link>
+        </div>
       </div>
     </section>
   );
-};
-
-export default Gallery;
+}

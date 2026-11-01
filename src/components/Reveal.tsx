@@ -40,8 +40,7 @@ export default function Reveal({
 
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const targets =
-          stagger != null ? Array.from(el.children) : el;
+        const targets = stagger != null ? Array.from(el.children) : el;
         gsap.from(targets, {
           opacity: 0,
           y,
@@ -49,6 +48,9 @@ export default function Reveal({
           delay,
           ease: "power3.out",
           stagger: stagger ?? 0,
+          // Content stays visible until the trigger fires; if the trigger
+          // never runs (programmatic scroll, anchor jump), nothing is hidden.
+          immediateRender: false,
           scrollTrigger: {
             trigger: el,
             start: "top 85%",

@@ -8,6 +8,10 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    // Hostname Supabase Storage yang boleh dipakai next/image, dipisah koma.
+    MEDIA_HOSTNAMES: z.string().default("**.supabase.co,127.0.0.1,localhost"),
+    // Base URL API karangtaruna_api.
+    API_BASE_URL: z.string().url().default("http://127.0.0.1:3001"),
   },
 
   /**
@@ -25,6 +29,8 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    MEDIA_HOSTNAMES: process.env.MEDIA_HOSTNAMES,
+    API_BASE_URL: process.env.API_BASE_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

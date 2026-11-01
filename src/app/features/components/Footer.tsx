@@ -1,89 +1,68 @@
 import Link from "next/link";
-import React from "react";
-import Image from "next/image";
+import { navigation, site } from "~/content/site";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <div className="flex min-h-[300px] flex-col items-center justify-center gap-14 border-t border-t-gray-700 bg-neutral-100 dark:bg-slate-900">
-      <div className="flex flex-col gap-10 md:flex-row">
-        <div className="flex flex-col gap-2 px-10 pt-2 md:pt-10">
-          <Link href="/" className="flex gap-2 text-xl font-bold">
-            <Image src="/favicon.ico" width={50} height={50} alt="logo" />
-          </Link>
-          <h2 className="font-semibold">Kartar Mekar Jadi</h2>
-          <p className="text-muted-foreground">
-            &quot;Bersatu, Berkarya, Maju Bersama!&quot; 🚀🔥
+    <footer className="border-t-2 border-foreground bg-foreground text-background">
+      <div className="site-container grid gap-10 py-12 md:grid-cols-[1.2fr_1fr] lg:py-16">
+        <div className="max-w-xl">
+          <p className="font-display text-3xl font-extrabold sm:text-4xl">
+            MEKAR<span className="text-accent">JADI</span>
+          </p>
+          <p className="mt-4 max-w-md text-sm leading-7 text-background/80 sm:text-base">
+            Ruang informasi organisasi, kegiatan, dan keanggotaan Karang Taruna
+            di Dusun Domas.
           </p>
         </div>
-        <div className="flex w-full flex-row flex-wrap gap-16 px-10 md:pt-24">
-          <div className="flex flex-col gap-2">
-            <h1 className="font-semibold uppercase">Company</h1>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="./#about"
-            >
-              Tentang Kita
-            </Link>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="/contact"
-            >
-              Kontak
-            </Link>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="https://shaa.dev"
-            >
-              shakuroi.dev
-            </Link>
+
+        <div className="grid grid-cols-2 gap-8">
+          <div>
+            <h2 className="font-display font-bold">Jelajahi</h2>
+            <ul className="mt-3 space-y-1">
+              {navigation.slice(1).map((item) => (
+                <li key={item.href}>
+                  <Link
+                    className="flex min-h-11 items-center text-sm text-background/80 hover:text-background"
+                    href={item.href}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="flex flex-col gap-2">
-            <h1 className="font-semibold uppercase">Resource</h1>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="./#gallery"
-            >
-              Dokumentasi
-            </Link>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="/event"
-            >
-              Berita & Event
-            </Link>
-          </div>
-          <div className="flex flex-col gap-2">
-            <h1 className="font-semibold uppercase">Media Sosial</h1>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="https://www.instagram.com/mekarjadi.offc/"
-            >
-              Instagram
-            </Link>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="https://www.instagram.com/mekarjadi.offc/"
-            >
-              Youtube
-            </Link>
-            <Link
-              className="text-muted-foreground hover:text-primary"
-              href="https://linktr.ee/kartarmj"
-            >
-              LinkTree
-            </Link>
+          <div>
+            <h2 className="font-display font-bold">Kanal resmi</h2>
+            <ul className="mt-3 space-y-1">
+              <li>
+                <a
+                  className="flex min-h-11 items-center text-sm text-background/80 hover:text-background"
+                  href={site.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  className="flex min-h-11 items-center text-sm text-background/80 hover:text-background"
+                  href={site.linktree}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Linktree
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-
-      <hr className="m-0 w-full border-t border-neutral-200 p-0 dark:border-neutral-700" />
-      <div className="flex w-full items-center justify-center pb-4">
-        <p className="text-center text-muted-foreground">
-          &copy; 2025 Karang Taruna Mekar Jadi Desa Domas
-        </p>
+      <div className="border-t border-background/20">
+        <div className="site-container py-5 text-sm text-background/70">
+          © {new Date().getFullYear()} {site.name}, {site.location}.
+        </div>
       </div>
-    </div>
+    </footer>
   );
-};
-
-export default Footer;
+}

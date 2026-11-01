@@ -4,66 +4,137 @@
 
 @layer base {
   :root {
-    --background: 200 100% 95%;
-    --foreground: 200 5% 0%;
-    --card: 200 50% 90%;
-    --card-foreground: 200 5% 10%;
-    --popover: 200 100% 95%;
-    --popover-foreground: 200 100% 0%;
-    --primary: 200 100% 50%;
+    --background: 43 38% 95%;
+    --foreground: 201 55% 14%;
+    --card: 42 60% 98%;
+    --card-foreground: 201 55% 14%;
+    --popover: 42 60% 98%;
+    --popover-foreground: 201 55% 14%;
+    --primary: 190 100% 25%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 200 30% 70%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 162 30% 85%;
-    --muted-foreground: 200 5% 35%;
-    --accent: 162 30% 80%;
-    --accent-foreground: 200 5% 10%;
-    --destructive: 0 100% 30%;
-    --destructive-foreground: 200 5% 90%;
-    --border: 200 30% 50%;
-    --input: 200 30% 18%;
-    --ring: 355 78% 56%;
-    --radius: 0.75rem;
+    --secondary: 45 26% 88%;
+    --secondary-foreground: 201 55% 14%;
+    --muted: 42 23% 88%;
+    --muted-foreground: 197 15% 31%;
+    --accent: 7 63% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 71% 38%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 191 14% 59%;
+    --input: 191 14% 59%;
+    --ring: 7 63% 43%;
+    --radius: 0.5rem;
+    /* Halaman ID Card: permukaan dan tinta mengikuti tema */
+    --idc-surface: #ffffff;
+    --idc-surface-ink: #102b38;
   }
 
   .dark {
-    --background: 200 50% 5%;
-    --foreground: 200 5% 90%;
-    --card: 200 50% 0%;
-    --card-foreground: 200 5% 90%;
-    --popover: 200 50% 5%;
-    --popover-foreground: 200 5% 90%;
-    --primary: 200 100% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 200 30% 10%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 162 30% 15%;
-    --muted-foreground: 200 5% 60%;
-    --accent: 162 30% 15%;
-    --accent-foreground: 200 5% 90%;
-    --destructive: 0 100% 30%;
-    --destructive-foreground: 200 5% 90%;
-    --border: 200 30% 18%;
-    --input: 200 30% 18%;
-    --ring: 355 78% 56%;
-    --radius: 0.75rem;
+    --background: 199 70% 8%;
+    --foreground: 43 38% 95%;
+    --card: 199 55% 12%;
+    --card-foreground: 43 38% 95%;
+    --popover: 199 55% 12%;
+    --popover-foreground: 43 38% 95%;
+    --primary: 187 61% 63%;
+    --primary-foreground: 199 70% 8%;
+    --secondary: 197 34% 18%;
+    --secondary-foreground: 43 38% 95%;
+    --muted: 198 31% 17%;
+    --muted-foreground: 190 17% 72%;
+    --accent: 8 100% 70%;
+    --accent-foreground: 199 70% 8%;
+    --destructive: 0 72% 60%;
+    --destructive-foreground: 199 70% 8%;
+    --border: 193 24% 34%;
+    --input: 193 24% 34%;
+    --ring: 8 100% 70%;
+    --idc-surface: #061a23;
+    --idc-surface-ink: #f7f2e8;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a,
+  button,
+  [role="button"],
+  summary {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 3px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    color: hsl(var(--accent-foreground));
+    background: hsl(var(--accent));
   }
 }
 
-/* Real masonry columns (works across browsers, unlike grid-template-rows: masonry) */
-.masonry-grid {
-  column-gap: 1rem;
+@layer components {
+  .site-container {
+    @apply mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-10;
+  }
+
+  .section-space {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply font-display text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm;
+  }
+
+  .marker-line {
+    @apply h-1 w-20 bg-accent;
+    transform: rotate(-2deg);
+  }
+
+  .text-link {
+    @apply inline-flex min-h-11 items-center border-b-2 border-current font-display font-bold text-primary transition-colors hover:text-accent;
+  }
+
+  .skip-link {
+    @apply fixed left-4 top-4 z-[100] -translate-y-24 bg-foreground px-4 py-3 font-bold text-background transition-transform focus:translate-y-0;
+  }
+
+  .photo-frame {
+    @apply overflow-hidden border-2 border-foreground bg-card shadow-[8px_8px_0_0_hsl(var(--accent))];
+  }
 }
-.masonry-grid > * {
-  break-inside: avoid;
-  margin-bottom: 1rem;
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
