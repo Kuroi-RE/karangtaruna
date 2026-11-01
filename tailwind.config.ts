@@ -4,20 +4,12 @@ import TailwindAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
-  content: ["./src/**/*.tsx"],
+  content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      keyframes: {
-        shine: {
-          "0%": { "background-position": "100%" },
-          "100%": { "background-position": "-100%" },
-        },
-      },
-      animation: {
-        shine: "shine 5s linear infinite",
-      },
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],
+        display: ["var(--font-display)", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -43,11 +35,6 @@ export default {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        blueSea: {
-          DEFAULT: "#89CFF3",
-          foreground: "#B7EFFE",
-          mute: "#CDF5FD",
-        },
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
@@ -63,13 +50,6 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
-        },
       },
     },
   },

@@ -1,171 +1,119 @@
 "use client";
 
-import * as React from "react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import Link from "next/link";
-import { AlignJustify, ChevronDown, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
-import Image from "next/image";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { navigation } from "~/content/site";
+import { cn } from "~/lib/utils";
 
 export default function Navbar() {
-  const [selectedTheme, setSelectedTheme] = React.useState<string | null>(
-    "light",
+  const pathname = usePathname();
+  const { resolvedTheme, setTheme } = useTheme();
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
   );
-  const [isOpen, setIsOpen] = React.useState(false);
-  const { setTheme } = useTheme();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const dark = resolvedTheme === "dark";
 
   return (
-    <nav className="fixed z-50 h-16 w-full bg-background shadow-md">
-      <div className="container !mx-5 flex h-full items-center justify-between px-4 py-3">
-        {/* Logo */}
-
-        <Link href="/" className="flex gap-2 text-xl font-bold">
-          <Image src="/favicon.ico" width={40} height={40} alt="logo" />
-          <span className="max-w-3.5 text-sm">Karang Taruna</span>
-        </Link>
-
-        {/* Menu desktop */}
-        <div className="mr-20 hidden gap-6 md:flex md:items-center">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <h1 className="inline-flex cursor-pointer font-semibold">
-                Theme <ChevronDown />
-              </h1>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem
-                checked={selectedTheme === "dark"}
-                onCheckedChange={() => {
-                  setSelectedTheme("dark");
-                  setTheme("dark");
-                }}
-              >
-                Dark
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={selectedTheme === "light"}
-                onCheckedChange={() => {
-                  setSelectedTheme("light");
-                  setTheme("light");
-                }}
-              >
-                Light
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <Link
-            className="!font-semibold transition-colors hover:!text-blue-300"
-            href="./#about"
-          >
-            Tentang Kita
-          </Link>
-          <Link
-            className="!font-semibold transition-colors hover:!text-blue-300"
-            href="./#kegiatan"
-          >
-            Kegiatan
-          </Link>
-          <Link
-            className="!font-semibold transition-colors hover:!text-blue-300"
-            href="./#gallery"
-          >
-            Gallery
-          </Link>
-        </div>
-
-        {/* Toggle Menu (Mobile) */}
-        <button
-          onClick={() => setIsOpen(true)}
-          className="!pr-10 text-gray-700 focus:outline-none md:hidden"
-        >
-          <AlignJustify size={28} />
-        </button>
-      </div>
-
-      {/* Fullscreen Mobile Menu dengan Animasi */}
-      <div
-        className={`fixed inset-0 z-50 flex flex-col items-center justify-center gap-10 space-y-6 bg-background transition-all duration-500 ease-in-out ${
-          isOpen
-            ? "translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-full opacity-0"
-        }`}
+    <header className="sticky top-0 z-50 border-b-2 border-foreground/20 bg-background">
+      <nav
+        aria-label="Navigasi utama"
+        className="site-container flex min-h-16 items-center justify-between gap-4"
       >
-        <div className="absolute left-5 top-14 flex gap-2 font-bold">
-          <Image src="/favicon.ico" width={40} height={40} alt="logo" />
-          <span className="max-w-3.5 text-sm">Karang Taruna</span>
+        <Link
+          href="/"
+          className="group flex min-h-11 items-center font-display font-extrabold leading-none"
+        >
+          <span className="text-xl sm:text-2xl">MEKAR</span>
+          <span className="text-xl text-accent sm:text-2xl">JADI</span>
+          <span className="sr-only">, Karang Taruna Dusun Domas</span>
+        </Link>
+
+        <div className="hidden items-center gap-1 lg:flex">
+          {navigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isActive(item.href) ? "page" : undefined}
+              className={cn(
+                "flex min-h-11 items-center border-b-2 px-3 font-display text-sm font-bold transition-colors",
+                isActive(item.href)
+                  ? "border-accent text-accent"
+                  : "border-transparent text-foreground hover:border-primary hover:text-primary",
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
 
-        <button
-          onClick={() => setIsOpen(false)}
-          className="absolute right-5 top-5 text-gray-700 focus:outline-none"
-        >
-          <X size={32} />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            className="flex h-11 w-11 items-center justify-center border-2 border-foreground bg-background transition-colors hover:bg-secondary"
+            onClick={() => setTheme(dark ? "light" : "dark")}
+            aria-label={
+              mounted && dark ? "Gunakan tema terang" : "Gunakan tema gelap"
+            }
+          >
+            {mounted && dark ? (
+              <Sun aria-hidden="true" />
+            ) : (
+              <Moon aria-hidden="true" />
+            )}
+          </button>
+          <button
+            type="button"
+            className="flex h-11 items-center gap-2 border-2 border-foreground px-3 font-display text-sm font-bold lg:hidden"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+          >
+            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            Menu
+          </button>
+        </div>
+      </nav>
 
-        <Link
-          onClick={() => setIsOpen(false)}
-          className="!font-semibold transition-colors hover:!text-blue-300"
-          href="./#about"
+      {open ? (
+        <div
+          id="menu-mobile"
+          className="border-t-2 border-foreground bg-background lg:hidden"
         >
-          Tentang Kita
-        </Link>
-
-        <Link
-          onClick={() => setIsOpen(false)}
-          className="!font-semibold transition-colors hover:!text-blue-300"
-          href="./#kegiatan"
-        >
-          Kegiatan
-        </Link>
-
-        <Link
-          onClick={() => setIsOpen(false)}
-          className="!font-semibold transition-colors hover:!text-blue-300"
-          href="./#gallery"
-        >
-          Gallery
-        </Link>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <h1 className="inline-flex cursor-pointer font-semibold">
-              Theme <ChevronDown />
-            </h1>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuCheckboxItem
-              checked={selectedTheme === "dark"}
-              onCheckedChange={() => {
-                setSelectedTheme("dark");
-                setTheme("dark");
-              }}
-            >
-              Dark
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
-              checked={selectedTheme === "light"}
-              onCheckedChange={() => {
-                setSelectedTheme("light");
-                setTheme("light");
-              }}
-            >
-              Light
-            </DropdownMenuCheckboxItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </nav>
+          <div className="site-container grid py-3">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className={cn(
+                  "flex min-h-12 items-center border-b border-border font-display font-bold",
+                  isActive(item.href) ? "text-accent" : "text-foreground",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </header>
   );
 }
