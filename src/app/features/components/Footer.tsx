@@ -59,8 +59,30 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-background/20">
-        <div className="site-container py-5 text-sm text-background/70">
-          © {new Date().getFullYear()} {site.name}, {site.location}.
+        <div className="site-container flex flex-col gap-2 py-5 text-sm text-background/70 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} {site.name}, {site.location}.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-background/80">
+            <span>Developed by</span>
+            <a
+              href="https://github.com/Kuroi-RE"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center font-semibold text-background transition-colors hover:text-accent"
+            >
+              Shaa.dev
+            </a>
+            <span aria-hidden="true">•</span>
+            <a
+              href="https://github.com/viona123"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center font-semibold text-background transition-colors hover:text-accent"
+            >
+              Vionana
+            </a>
+          </div>
         </div>
       </div>
     </footer>
