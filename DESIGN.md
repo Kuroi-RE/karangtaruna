@@ -33,4 +33,5 @@ ENERGY 3 / RHYTHM 3 / MOTION 2
 - Foto: dokumentasi nyata menjadi bukti kegiatan dan sumber karakter visual utama.
 - Motion: reveal singkat membantu urutan baca; tidak ada loop atau efek yang mengganggu isi.
 - Kartu anggota: susunan seragam karena daftar keanggotaan memang unit data yang setara; ID Card memakai strap merah dan motif bingkai sebagai perpanjangan identitas situs.
+- Tampilan anggota: menyediakan dua mode visual (Timeline sebagai default bernuansa agenda-komunal, dan Card Berjejer dalam format grid multi-kolom responsif) dengan switcher toggle yang ramah aksesibilitas (aria-pressed, min-h-11 target sentuh, kontras tinggi).
 - ID Card interaktif: badge kepengurusan menggantung dari lanyard yang menempel di bawah navbar pada latar dinamis mengikuti tema; di mobile teks layar pertama berada di balik kartu, kartu berputar di ring dan bisa dibalik lewat tap atau Enter; cetakan strap memakai font situs dan wajah kartu memakai data anggota dari sumber terpusat.
