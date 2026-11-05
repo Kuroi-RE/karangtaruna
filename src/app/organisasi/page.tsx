@@ -42,7 +42,7 @@ export default async function OrganizationPage() {
           </div>
           <p className="max-w-xl text-lg leading-8 text-primary-foreground/90 lg:justify-self-end">
             {site?.description ??
-              "Karang Taruna Mekarjadi merupakan organisasi kepemudaan di Dusun Domas. Halaman ini memuat informasi yang dapat diterbitkan tanpa menebak data pengurus atau kebijakan organisasi."}
+              "Karang Taruna Mekarjadi merupakan organisasi pemuda di Dusun Domas. Halaman ini menampilkan informasi mengenai organisasi, arsip kegiatan, dan anggota."}
           </p>
         </div>
       </header>
@@ -68,7 +68,7 @@ export default async function OrganizationPage() {
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
                 {site?.profile ??
-                  "Organisasi ini menjadi titik temu informasi kegiatan pemuda di Dusun Domas. Arsip yang tersedia saat ini mencatat kegiatan pada 2023 dan 2024."}
+                  "Menjadi jembatan bagi pemuda dusun Domas untuk memulai perjalanan organisasi, mengetahui bagaimana menjadi anggota dari sebuah organisasi yang berorientasi pada kebutuhan dan keinginan warga."}
               </p>
             </Reveal>
             <Reveal
@@ -104,12 +104,11 @@ export default async function OrganizationPage() {
               ) : (
                 <>
                   <h2 className="mt-3 font-display text-2xl font-extrabold">
-                    Visi, misi, dan kepengurusan sedang diperbarui.
+                    Visi, misi, dan kepengurusan masih belum tersedia.
                   </h2>
                   <p className="mt-4 leading-7 text-muted-foreground">
-                    Nama pengurus, masa jabatan, serta rumusan visi dan misi
-                    belum ditampilkan sampai data resmi tersedia. Langkah ini
-                    mencegah informasi sementara terbaca sebagai fakta.
+                    Nama pengurus, masa jabatan, serta visi dan misi
+                    belum dapat ditampilkan.
                   </p>
                 </>
               )}

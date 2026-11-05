@@ -18,10 +18,10 @@ export default function HomePage() {
               Keanggotaan
             </p>
             <h2 className="mt-3 max-w-4xl font-display text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-              Kenali anggota Karang Taruna Mekarjadi.
+              Lihat anggota Karang Taruna Mekarjadi.
             </h2>
             <p className="mt-5 max-w-2xl leading-8 text-accent-foreground/90">
-              Daftar kepengurusan saat ini tersedia di halaman keanggotaan,
+              Daftar anggota tersedia di halaman keanggotaan,
               lengkap dengan ID Card setiap anggota.
             </p>
           </div>

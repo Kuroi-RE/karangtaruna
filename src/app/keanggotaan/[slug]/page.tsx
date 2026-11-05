@@ -140,7 +140,7 @@ function BadgeBack({ member }: { member: MemberResponse }) {
           MEKARJADI
         </p>
         <p className="mt-1 text-[7px] font-bold uppercase tracking-[0.18em]">
-          Dusun Domas · mekarjadi.vercel.app
+          Dusun Domas · mekarjadi.web.id
         </p>
       </div>
     </div>
@@ -193,8 +193,7 @@ export default async function MemberIdCardPage({ params }: PageProps) {
               {member.memberNo ? `No. Anggota ${member.memberNo}` : ""}
             </p>
             <p className="mt-6 max-w-md text-sm leading-7 text-muted-foreground">
-              Kartu bisa digeser untuk mengayun, dan diklik atau ditekan Enter
-              untuk membalik ke sisi belakang.
+              Kartu Interaktif yang dapat digeser dan diklik untuk melihat informasi anggota.
             </p>
             <Link
               href="/keanggotaan"

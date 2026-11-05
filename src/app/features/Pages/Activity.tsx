@@ -23,8 +23,8 @@ export default async function Activity() {
 
         {activities.length === 0 ? (
           <p className="mt-10 max-w-2xl leading-7 text-muted-foreground">
-            Belum ada kegiatan yang diterbitkan. Arsip akan tampil di sini
-            begitu dokumentasi kegiatan selesai diunggah pengurus.
+            Belum ada kegiatan yang dapat ditampilkan. Arsip akan tampil di sini
+            begitu dokumentasi kegiatan selesai.
           </p>
         ) : (
           <Reveal className="mt-10 grid gap-10 lg:grid-cols-2" stagger={0.12}>

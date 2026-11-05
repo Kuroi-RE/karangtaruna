@@ -31,13 +31,12 @@ export default function About() {
           <div className="flex flex-col justify-between gap-8">
             <div>
               <p className="text-lg leading-8 text-primary-foreground/90">
-                Karang Taruna Mekarjadi adalah organisasi kepemudaan di Dusun
-                Domas. Situs ini menyatukan informasi organisasi dan arsip
+                Karang Taruna Mekarjadi adalah organisasi pemuda di Dusun
+                Domas. Website ini sebagai portal informasi organisasi dan arsip
                 kegiatan yang tersedia.
               </p>
               <p className="mt-5 leading-7 text-primary-foreground/90">
-                Informasi visi, misi, dan kepengurusan sedang diperbarui agar
-                data yang diterbitkan dapat dipertanggungjawabkan.
+                Sebagai portal informasi organisasi dan arsip kegiatan untuk mengenang perjalanan Karang Taruna Mekarjadi.
               </p>
             </div>
             <Link

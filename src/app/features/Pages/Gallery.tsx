@@ -16,12 +16,12 @@ export default async function Gallery() {
           <div>
             <p className="eyebrow">Dokumentasi</p>
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-none sm:text-5xl lg:text-6xl">
-              Potongan dari kegiatan warga.
+              Potongan dari kegiatan.
             </h2>
           </div>
-          <p className="max-w-xl text-base leading-8 text-muted-foreground lg:justify-self-end">
-            Foto yang tampil berasal dari arsip kegiatan yang telah diterbitkan.
-          </p>
+          {/*<p className="max-w-xl text-base leading-8 text-muted-foreground lg:justify-self-end">
+
+          </p>*/}
         </div>
 
         {galleryImages.length === 0 ? (

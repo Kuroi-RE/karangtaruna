@@ -51,12 +51,10 @@ export default async function ContactPage() {
         <header>
           <p className="eyebrow">Kontak</p>
           <h1 className="mt-4 max-w-3xl font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.04em] sm:text-6xl lg:text-8xl">
-            Mari bicara lewat kanal yang tersedia.
+            Informasi kontak Karang Taruna Mekarjadi
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">
-            Gunakan kanal berikut untuk menanyakan organisasi, kegiatan, atau
-            keanggotaan. Formulir situs tidak ditampilkan karena belum ada
-            sistem penerima pesan yang dapat diverifikasi.
+            Berbagai platform komunikasi yang tersedia untuk Karang Taruna Mekarjadi.
           </p>
         </header>
 
@@ -85,7 +83,7 @@ export default async function ContactPage() {
               </span>
             </a>
           ))}
-          <div className="border-l-4 border-primary bg-secondary p-6">
+          {/*<div className="border-l-4 border-primary bg-secondary p-6">
             <h2 className="font-display text-xl font-extrabold">
               Tentang data pribadi
             </h2>
@@ -94,7 +92,7 @@ export default async function ContactPage() {
               sensitif melalui pesan pertama. Tanyakan terlebih dahulu data apa
               yang benar-benar diperlukan.
             </p>
-          </div>
+          </div>*/}
           <Link href="/keanggotaan" className="text-link">
             Lihat daftar anggota
           </Link>

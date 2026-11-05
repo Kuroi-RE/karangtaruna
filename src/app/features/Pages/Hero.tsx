@@ -17,15 +17,15 @@ export default async function Hero() {
         </h1>
         <div className="marker-line mt-7" aria-hidden="true" />
         <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-          Kenali Karang Taruna Mekarjadi, lihat kegiatan yang sudah
-          terdokumentasi, dan temukan jalur untuk terhubung dengan pengurus.
+          <strong>Karang Taruna Mekarjadi</strong>, lihat kegiatan yang
+          terdokumentasi, dan kenali anggota kami.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg">
-            <Link href="/program-kegiatan">Lihat arsip kegiatan</Link>
+            <Link href="/program-kegiatan">Arsip kegiatan</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link href="/keanggotaan">Kenali anggota kami</Link>
+            <Link href="/keanggotaan">Anggota kami</Link>
           </Button>
         </div>
       </div>
